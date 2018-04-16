@@ -396,7 +396,10 @@ class MainWP_Right_Now {
 						if ( ! is_array( $plugin_upgrades ) ) {
 							$plugin_upgrades = array();
 						}
-						$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
+						//$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
+						// to fix empty values
+						$premiumUpgrade = array_filter($premiumUpgrade);								
+						$plugin_upgrades[ $crrSlug ] = array_merge($plugin_upgrades[ $crrSlug ], $premiumUpgrade);							
 					}
 				}
 			}
@@ -711,7 +714,10 @@ class MainWP_Right_Now {
 							$plugin_upgrades = array();
 						}
 						if ( ! $website->is_ignorePluginUpdates ) {
-							$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
+							//$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
+							// to fix empty values
+							$premiumUpgrade = array_filter($premiumUpgrade);								
+							$plugin_upgrades[ $crrSlug ] = array_merge($plugin_upgrades[ $crrSlug ], $premiumUpgrade);	
 						}
 					} else if ( $premiumUpgrade['type'] == 'theme' ) {
 						if ( ! is_array( $theme_upgrades ) ) {
@@ -1278,8 +1284,11 @@ class MainWP_Right_Now {
 							if ( $premiumUpgrade['type'] == 'plugin' ) {
 								if ( ! is_array( $plugin_upgrades ) ) {
 									$plugin_upgrades = array();
-								}
-								$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
+								}								
+								//$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
+								// to fix empty values
+								$premiumUpgrade = array_filter($premiumUpgrade);								
+								$plugin_upgrades[ $crrSlug ] = array_merge($plugin_upgrades[ $crrSlug ], $premiumUpgrade);	
 							}
 						}
 					}
@@ -1414,7 +1423,10 @@ class MainWP_Right_Now {
 							if ( ! is_array( $plugin_upgrades ) ) {
 								$plugin_upgrades = array();
 							}
-							$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
+							//$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
+							// to fix empty values
+							$premiumUpgrade = array_filter($premiumUpgrade);								
+							$plugin_upgrades[ $crrSlug ] = array_merge($plugin_upgrades[ $crrSlug ], $premiumUpgrade);	
 						}
 					}
 				}
@@ -1585,7 +1597,10 @@ class MainWP_Right_Now {
 										if ( ! is_array( $plugin_upgrades ) ) {
 											$plugin_upgrades = array();
 										}
-										$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
+										//$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
+										// to fix empty values
+										$premiumUpgrade = array_filter($premiumUpgrade);								
+										$plugin_upgrades[ $crrSlug ] = array_merge($plugin_upgrades[ $crrSlug ], $premiumUpgrade);	
 									}
 								}
 							}

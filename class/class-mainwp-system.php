@@ -2008,6 +2008,11 @@ class MainWP_System {
 				if ( defined( 'DOING_CRON' ) && DOING_CRON ) {
 					return true;
 				}
+				
+				// To fix bug run from wp cli
+				if ( defined( 'WP_CLI' ) && WP_CLI ) {
+					return true;
+				}
 
 				if ( empty( $current_user ) ) {
 					if ( ! function_exists( 'wp_get_current_user' ) ) {

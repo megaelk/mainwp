@@ -581,10 +581,11 @@ class MainWP_Right_Now {
         
 		$websites = MainWP_DB::Instance()->query( $sql );
         
-        MainWP_UI::renderBeginReadyPopup();
-        
 		if ( ! $websites ) {            
 			return;
+		} else {
+			// to fix bug
+			MainWP_UI::renderBeginReadyPopup();
 		}
 
 		// NEW 4.0: group view

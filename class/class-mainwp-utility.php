@@ -2796,7 +2796,7 @@ EOT;
 	public static function utf8ize($mixed) {
 		if (is_array($mixed)) {
 			foreach ($mixed as $key => $value) {
-				$mixed[$key] = utf8ize($value);
+				$mixed[$key] = self::utf8ize($value);
 			}
 		} elseif (is_string($mixed)) {
 			if ( function_exists( 'mb_convert_encoding' )) {

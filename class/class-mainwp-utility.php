@@ -2554,8 +2554,17 @@ EOT;
 		foreach ( $keys as $key ) {
 			$outputSite[ $key ] = $website->$key;
 		}
-
+		
 		return (object) $outputSite;
+	}
+	
+	public static function mapSiteArray( &$website, $keys ) {
+		$outputSite = array();
+		foreach ( $keys as $key ) {
+			$outputSite[ $key ] = $website->$key;
+		}
+		
+		return $outputSite;
 	}
 
 	public static function can_edit_website( &$website ) {

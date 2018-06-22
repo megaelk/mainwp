@@ -893,14 +893,14 @@ class MainWP_Settings {
 			$keys = array('name', 'url', 'adminname', 'groups', 'uniqueId', 'http_user', 'http_pass', 'verify_certificate', 'ssl_version' );
 			$allowedHeaders = array('site name', 'url', 'admin name', 'group', 'security id', 'http username', 'http password', 'verify certificate', 'ssl version');
 			
-			$csv = implode(",", $allowedHeaders) . "\r";
+			$csv = implode(",", $allowedHeaders) .  "\r\n"; //PHP_EOL;
 			@MainWP_DB::data_seek( $websites, 0 );			
 			while ( $websites && ( $website = @MainWP_DB::fetch_object( $websites ) ) ) {				
 				if ( empty($website) ) {
 					continue;
 				}				
 				$row = MainWP_Utility::mapSiteArray( $website, $keys );				
-				$csv .= '"' . implode('","', $row) . '"' . "\r";				
+				$csv .= '"' . implode('","', $row) . '"' .  "\r\n"; //PHP_EOL;				
 			}	
 			
 			header('Content-Type: text/csv; charset=utf-8');
@@ -910,7 +910,7 @@ class MainWP_Settings {
 		}		
 	}
 	
-	public function renderDisconnect() {		
+	public static function renderDisconnect() {		
 			$sql = MainWP_DB::Instance()->getSQLWebsitesForCurrentUser(false);
 			$websites = MainWP_DB::Instance()->query( $sql );
 			if (!$websites)	{			

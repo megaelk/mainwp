@@ -573,7 +573,7 @@ class MainWP_Manage_Sites_View {
 			if ( $_FILES['mainwp_managesites_file_bulkupload']['error'] == UPLOAD_ERR_OK ) {
 				if ( is_uploaded_file( $_FILES['mainwp_managesites_file_bulkupload']['tmp_name'] ) ) {
 					$content = file_get_contents( $_FILES['mainwp_managesites_file_bulkupload']['tmp_name'] );
-					$lines = explode( "\r", $content );										
+					$lines = explode( "\r\n", $content ); // PHP_EOL									
 					$allowedHeaders = array('site name', 'url', 'admin name', 'group', 'security id', 'http username', 'http password', 'verify certificate', 'ssl version');
 					$default = array('', '', '', '', '', '', '', '1', 'auto');
 
@@ -587,7 +587,7 @@ class MainWP_Manage_Sites_View {
 							if (MainWP_Utility::startsWith($line, '#')) continue;
 
 							if ( ( $header_line == null ) && $_POST['mainwp_managesites_chk_header_first'] ) {
-								$header_line = $line . "\n";
+								$header_line = $line . "\r\n"; // PHP_EOL
 								$header_line_split_tmp = explode( ',', $header_line );
 								$header_line_split = array();
 								for ($x = 0; $x < count($header_line_split_tmp); $x++)
@@ -2100,7 +2100,7 @@ class MainWP_Manage_Sites_View {
                 $params['unique_id'] = isset( $_POST['managesites_add_uniqueId'] ) ? $_POST['managesites_add_uniqueId'] : '';
                 $params['ssl_verify'] = ( !isset( $_POST['verify_certificate'] ) || ( empty( $_POST['verify_certificate'] ) && ( $_POST['verify_certificate'] !== '0' ) ) ? null : $_POST['verify_certificate'] );                
                 $params['force_use_ipv4'] = ( !isset( $_POST['force_use_ipv4'] ) || ( empty( $_POST['force_use_ipv4'] ) && ( $_POST['force_use_ipv4'] !== '0' ) ) ? null : $_POST['force_use_ipv4'] );
-                $params['ssl_version'] = !isset( $_POST['ssl_version'] ) || empty( $_POST['ssl_version'] ) ? null : $_POST['ssl_version'];                
+                $params['ssl_version'] = !isset( $_POST['ssl_version'] ) || empty( $_POST['ssl_version'] ) ? 0 : $_POST['ssl_version'];                
                 $params['http_user'] = isset( $_POST['managesites_add_http_user'] ) ? $_POST['managesites_add_http_user'] : '';
                 $params['http_pass'] = isset( $_POST['managesites_add_http_pass'] ) ? $_POST['managesites_add_http_pass'] : '';                
                 $params['groupids'] = isset( $_POST['groupids'] ) ? $_POST['groupids'] : array();                
@@ -2135,7 +2135,7 @@ class MainWP_Manage_Sites_View {
 				$url = $params['url'];
 
 				$verifyCertificate = ( !isset( $params['ssl_verify'] ) || ( empty( $params['ssl_verify'] ) && ( $params['ssl_verify'] !== '0' ) ) ? null : $params['ssl_verify'] );
-				$sslVersion = !isset( $params['ssl_version'] ) || empty( $params['ssl_version'] ) ? null : $params['ssl_version'];
+				$sslVersion = !isset( $params['ssl_version'] ) || empty( $params['ssl_version'] ) ? 0 : $params['ssl_version'];
 				$addUniqueId = isset( $params['unique_id'] ) ? $params['unique_id'] : '';
 				$http_user = isset( $params['http_user'] ) ? $params['http_user'] : '';
 				$http_pass = isset( $params['http_pass'] ) ? $params['http_pass'] : '';

@@ -955,7 +955,7 @@ class MainWP_Settings {
 							mainwp_disc_sites_start_specific( objProcess);
 						}
 						if(disconnect_bulkFinishedThreads == disconnect_bulkTotalThreads) {
-							jQuery('#disconnect-sites-wrap').append('<br/><a href="admin.php?page=MainWPTools" class="button button-primary">Return to MainWP Tool</a>')
+							jQuery('#disconnect-sites-wrap').append('<br/><a href="admin.php?page=MainWPTools" class="button button-primary">Return to MainWP Tools</a>')
 						}
 					}
 

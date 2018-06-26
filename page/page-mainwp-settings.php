@@ -833,20 +833,20 @@ class MainWP_Settings {
 				</td>
 			</tr>
 			<tr>
-				<th scope="row"><?php _e('Export Sites', 'mainwp'); ?></th>
+				<th scope="row"><?php _e('Export sites', 'mainwp'); ?></th>
 				<td>
-					<a href="admin.php?page=MainWPTools&doExportSites=yes&_wpnonce=<?php echo wp_create_nonce('export_sites'); ?>" class="button-primary button" target="_blank" /><?php _e('Export Sites', 'mainwp'); ?></a><br/>
+					<a href="admin.php?page=MainWPTools&doExportSites=yes&_wpnonce=<?php echo wp_create_nonce('export_sites'); ?>" class="button-primary button" target="_blank" /><?php _e('Export sites', 'mainwp'); ?></a><br/>
 					<em>
-						<?php _e('Export Sites information to csv file.', 'mainwp'); ?>
+						<?php _e('Export your child sites to a CSV file.', 'mainwp'); ?>
 					</em>
 				</td>
 			</tr>
 			<tr>
-				<th scope="row"><?php _e('Disconnect All Sites', 'mainwp'); ?></th>
+				<th scope="row"><?php _e('Disconnect sites', 'mainwp'); ?></th>
 				<td>
-					<a href="admin.php?page=MainWPTools&disconnectSites=yes&_wpnonce=<?php echo wp_create_nonce('disconnect_sites'); ?>" class="button-primary button" onclick="return confirm('<?php esc_html_e('Are you sure that you want to disconnect your sites?', 'mainwp');?>')" /><?php _e('Disconnect All Sites', 'mainwp'); ?></a><br/>
+					<a href="admin.php?page=MainWPTools&disconnectSites=yes&_wpnonce=<?php echo wp_create_nonce('disconnect_sites'); ?>" class="button-primary button" onclick="return confirm('<?php esc_html_e('Are you sure that you want to disconnect your sites?', 'mainwp');?>')" /><?php _e('Disconnect sites', 'mainwp'); ?></a><br/>
 					<em>
-						<?php _e('This will function will break the connection and leave the MainWP Child plugin active and which makes your sites vulnerable. Use only if you attend to reconnect site to the same or a different dashboard right away.', 'mainwp'); ?>
+						<?php _e('This function will break the connection between your dashboard and child sites. After breaking the connection, MainWP Child plugin will stay active. Use this feature only if you attend to reconnect sites right away or connect sites to a different MainWP Dashboard.', 'mainwp'); ?>
 					</em>
 				</td>
 			</tr>

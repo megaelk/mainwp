@@ -420,6 +420,8 @@ class MainWP_Themes {
 							'nossl',
 							'privkey',
 							'nosslkey',
+                            'http_user', 
+                            'http_pass'
 						) );
 					}
 				}
@@ -441,6 +443,8 @@ class MainWP_Themes {
 								'nossl',
 								'privkey',
 								'nosslkey',
+                                'http_user', 
+                                'http_pass'
 							) );
 						}
 						@MainWP_DB::free_result( $websites );
@@ -653,6 +657,8 @@ class MainWP_Themes {
 						'nossl',
 						'privkey',
 						'nosslkey',
+                        'http_user', 
+                        'http_pass'
 					) );
 				}
 				@MainWP_DB::free_result( $websites );

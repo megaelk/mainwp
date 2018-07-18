@@ -405,6 +405,8 @@ class MainWP_Plugins {
 						'nossl',
 						'privkey',
 						'nosslkey',
+                        'http_user', 
+                        'http_pass'
 					) );
 				}
 				@MainWP_DB::free_result( $websites );
@@ -721,6 +723,8 @@ class MainWP_Plugins {
 							'nossl',
 							'privkey',
 							'nosslkey',
+                            'http_user', 
+                            'http_pass'
 						) );
 					}
 				}
@@ -741,6 +745,8 @@ class MainWP_Plugins {
 								'nossl',
 								'privkey',
 								'nosslkey',
+                                'http_user', 
+                                'http_pass'
 							) );
 						}
 						@MainWP_DB::free_result( $websites );

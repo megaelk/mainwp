@@ -716,8 +716,8 @@ class MainWP_Utility {
 				@curl_setopt( $ch, CURLOPT_USERAGENT, $agent );
 				if ( ! empty( $http_user ) && ! empty( $http_pass ) ) {
 					curl_setopt( $ch, CURLOPT_USERPWD, "$http_user:$http_pass" );
-				}
-
+				}               
+                
 				$ssl_verifyhost    = false;
 				$verifyCertificate = isset( $website->verify_certificate ) ? $website->verify_certificate : null;
 				if ( $verifyCertificate !== null ) {
@@ -952,7 +952,7 @@ class MainWP_Utility {
 			} else {
 				$url .= 'admin-ajax.php';
 			}
-
+            
 			if ( property_exists( $website, 'http_user' ) ) $http_user = $website->http_user;
 			if ( property_exists( $website, 'http_pass' ) ) $http_pass = $website->http_pass;
 
@@ -2825,6 +2825,11 @@ EOT;
 
 	public static function removeHttpPrefix( $pUrl, $pTrimSlashes = false ) {
 		return str_replace( array( 'http:' . ( $pTrimSlashes ? '//' : '' ), 'https:' . ( $pTrimSlashes ? '//' : '' ) ), array( '', '' ), $pUrl );
+	}
+    
+    public static function removeHttpWWWPrefix( $pUrl ) {
+		$pUrl = self::removeHttpPrefix($pUrl, true);
+        return str_replace( 'www' , '', $pUrl );
 	}
 
 	public static function isArchive( $pFileName, $pPrefix = '', $pSuffix = '' ) {

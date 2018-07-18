@@ -129,7 +129,7 @@ class MainWP_Setup_Wizard {
 		$this->step = isset( $_GET['step'] ) ? sanitize_key( $_GET['step'] ) : current( array_keys( $this->steps ) );
 		$this->check_redirect();
         wp_enqueue_script( 'mainwp-setup', MAINWP_PLUGIN_URL . 'js/mainwp-setup.js', array( 'jquery', 'jquery-ui-tooltip' ), MAINWP_VERSION );
-		wp_enqueue_script( 'mainwp-setup-select2', MAINWP_PLUGIN_URL . 'js/select2/select2.js', array( 'jquery' ), MAINWP_VERSION );			
+		wp_enqueue_script( 'mainwp-setup-select2', MAINWP_PLUGIN_URL . 'js/select2/js/select2.min.js', array( 'jquery' ), MAINWP_VERSION );			
 		wp_enqueue_script( 'mainwp-setup-admin', MAINWP_PLUGIN_URL . 'js/mainwp-admin.js', array(), MAINWP_VERSION );		
 		
 		wp_localize_script('mainwp-setup', 'mainwpSetupLocalize', array('nonce' => wp_create_nonce('MainWPSetup')));
@@ -138,7 +138,7 @@ class MainWP_Setup_Wizard {
 		wp_enqueue_style( 'mainwp-font-awesome', MAINWP_PLUGIN_URL . 'css/font-awesome/css/font-awesome.min.css', array(), MAINWP_VERSION);
 		wp_enqueue_style( 'jquery-ui-style' );
 		wp_enqueue_style( 'mainwp-setup', MAINWP_PLUGIN_URL . 'css/mainwp-setup.css', array( 'dashicons', 'install' ), MAINWP_VERSION );
-		wp_enqueue_style( 'mainwp-setup-select2', MAINWP_PLUGIN_URL . 'js/select2/select2.css', array(), '3.4.5' );
+		wp_enqueue_style( 'mainwp-setup-select2', MAINWP_PLUGIN_URL . 'js/select2/css/select2.css', array(), '3.4.5' );
 
 		if ( ! empty( $_POST['save_step'] ) && isset( $this->steps[ $this->step ]['handler'] ) ) {
 			call_user_func( $this->steps[ $this->step ]['handler'] );
@@ -190,7 +190,7 @@ class MainWP_Setup_Wizard {
 			<script type="text/javascript"> var ajaxurl = '<?php echo esc_url( admin_url('admin-ajax.php') ); ?>';</script>
 		</head>
 		<body class="mwp-setup wp-core-ui">
-		<h1 id="mwp-logo"><a href="//mainwp.com"><img src="<?php echo MAINWP_PLUGIN_URL; ?>/images/logo-mainwp1.png" alt="MainWP" /></a></h1>
+		<h1 id="mwp-logo"><a href="//mainwp.com"><img src="<?php echo MAINWP_PLUGIN_URL; ?>images/logo-mainwp1.png" alt="MainWP" /></a></h1>
 		<?php
 	}
 

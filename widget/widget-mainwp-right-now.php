@@ -588,6 +588,9 @@ class MainWP_Right_Now {
 			MainWP_UI::renderBeginReadyPopup();
 		}
 
+        //Translation updates!
+		$mainwp_show_language_updates = get_option( 'mainwp_show_language_updates', 1 );
+
 		// NEW 4.0: group view
 		if ( $globalView && $userExtension->site_view == 2 ) {
 			$site_offset = array();
@@ -717,7 +720,9 @@ class MainWP_Right_Now {
 						if ( ! $website->is_ignorePluginUpdates ) {
 							//$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
 							// to fix empty values
-							$premiumUpgrade = array_filter($premiumUpgrade);								
+							$premiumUpgrade = array_filter($premiumUpgrade);	   
+                            if (!isset($plugin_upgrades[ $crrSlug ]))
+                                $plugin_upgrades[ $crrSlug ] = array(); // to fix warning
 							$plugin_upgrades[ $crrSlug ] = array_merge($plugin_upgrades[ $crrSlug ], $premiumUpgrade);	
 						}
 					} else if ( $premiumUpgrade['type'] == 'theme' ) {
@@ -936,7 +941,13 @@ class MainWP_Right_Now {
 		$total_themesIgnoredAbandoned += count( $themesIgnoredAbandoned_perSites );
 
 		//WP Upgrades part:
-		$total_upgrades = $total_wp_upgrades + $total_plugin_upgrades + $total_theme_upgrades + $total_translation_upgrades;		
+		$total_upgrades = $total_wp_upgrades + $total_plugin_upgrades + $total_theme_upgrades;
+
+        // to fix incorrect total updates
+        if ($mainwp_show_language_updates) {
+            $total_upgrades += $total_translation_upgrades;
+        }
+
 		?>
 		<?php
 		if ( $total_upgrades == 0 ) {
@@ -1600,7 +1611,9 @@ class MainWP_Right_Now {
 										}
 										//$plugin_upgrades[ $crrSlug ] = $premiumUpgrade;
 										// to fix empty values
-										$premiumUpgrade = array_filter($premiumUpgrade);								
+										$premiumUpgrade = array_filter($premiumUpgrade);
+                                        if (!isset($plugin_upgrades[ $crrSlug ]))
+                                            $plugin_upgrades[ $crrSlug ] = array(); // to fix warning
 										$plugin_upgrades[ $crrSlug ] = array_merge($plugin_upgrades[ $crrSlug ], $premiumUpgrade);	
 									}
 								}
@@ -2055,8 +2068,7 @@ class MainWP_Right_Now {
 
 		<?php
 
-		//Translation updates!
-		$mainwp_show_language_updates = get_option( 'mainwp_show_language_updates', 1 );
+		
 		if ( $mainwp_show_language_updates == 1 ) {
 			?>
 			<div class="mainwp-row">

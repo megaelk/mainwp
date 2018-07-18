@@ -715,6 +715,8 @@ class MainWP_User {
 							'nossl',
 							'privkey',
 							'nosslkey',
+                            'http_user', 
+                            'http_pass'
 						) );
 					}
 				}
@@ -735,6 +737,8 @@ class MainWP_User {
 								'nossl',
 								'privkey',
 								'nosslkey',
+                                'http_user', 
+                                'http_pass'
 							) );
 						}
 						@MainWP_DB::free_result( $websites );
@@ -1292,6 +1296,8 @@ class MainWP_User {
 							'nossl',
 							'privkey',
 							'nosslkey',
+                            'http_user', 
+                            'http_pass'
 						) );
 					}
 				}
@@ -1308,6 +1314,8 @@ class MainWP_User {
 								'nossl',
 								'privkey',
 								'nosslkey',
+                                'http_user', 
+                                'http_pass'
 							) );
 						}
 						@MainWP_DB::free_result( $websites );
@@ -1508,6 +1516,8 @@ class MainWP_User {
 							'nossl',
 							'privkey',
 							'nosslkey',
+                            'http_user', 
+                            'http_pass'
 						) );
 					} else {
 						$not_valid[] = __( "Error - The website doesn't exist in the Network.", 'mainwp' ) . " " . $url;;
@@ -1529,6 +1539,8 @@ class MainWP_User {
 								'nossl',
 								'privkey',
 								'nosslkey',
+                                'http_user', 
+                                'http_pass'
 							) );
 						}
 						@MainWP_DB::free_result( $websites );

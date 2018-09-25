@@ -420,7 +420,7 @@ class MainWP_Themes {
 							'nossl',
 							'privkey',
 							'nosslkey',
-                            'http_user', 
+                            'http_user',
                             'http_pass'
 						) );
 					}
@@ -443,7 +443,7 @@ class MainWP_Themes {
 								'nossl',
 								'privkey',
 								'nosslkey',
-                                'http_user', 
+                                'http_user',
                                 'http_pass'
 							) );
 						}
@@ -607,6 +607,9 @@ class MainWP_Themes {
 	public static function renderAllThemesTable( $output = null ) {
 		$keyword       = null;
 		$search_status = 'all';
+        if ( session_id() == '' ) {
+            session_start();
+        }
 		if ( $output == null ) {
 			$keyword             = isset( $_POST['keyword'] ) && ! empty( $_POST['keyword'] ) ? trim( $_POST['keyword'] ) : null;
 			$search_status       = isset( $_POST['status'] ) ? $_POST['status'] : 'all';
@@ -657,7 +660,7 @@ class MainWP_Themes {
 						'nossl',
 						'privkey',
 						'nosslkey',
-                        'http_user', 
+                        'http_user',
                         'http_pass'
 					) );
 				}
@@ -688,16 +691,13 @@ class MainWP_Themes {
 				}
 
 				if ( count( $output->errors ) == count( $dbwebsites ) ) {
-					session_start();
+
 					$_SESSION['SNThemesAll'] = $output;
 
 					return;
 				}
 			}
 
-			if ( session_id() == '' ) {
-				session_start();
-			}
 			$_SESSION['SNThemesAll']       = $output;
 			$_SESSION['SNThemesAllStatus'] = array(
 				'keyword'      => $keyword,
@@ -1194,6 +1194,9 @@ class MainWP_Themes {
 
 	public static function renderAutoUpdate() {
 		$cachedThemesSearch = null;
+        if ( session_id() == '' ) {
+            session_start();
+        }
 		if ( isset( $_SESSION['SNThemesAllStatus'] ) ) {
 			$cachedThemesSearch = $_SESSION['SNThemesAllStatus'];
 		}
@@ -1313,9 +1316,6 @@ class MainWP_Themes {
 			<div id="mainwp_themes_main" style="display: block; margin-top: 1.5em ;">
 				<div id="mainwp_themes_content">
 					<?php
-					if ( session_id() == '' ) {
-						session_start();
-					}
 					if ( isset( $_SESSION['SNThemesAll'] ) ) {
 						self::renderAllThemesTable( $_SESSION['SNThemesAll'] );
 						echo '<script>mainwp_themes_all_table_reinit();</script>';

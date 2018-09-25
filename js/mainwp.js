@@ -426,7 +426,7 @@ jQuery(document).ready(function () {
  * SecurityIssues
  */
 //var securityIssues_fixes = ['listing', 'wp_version', 'rsd', 'wlw', 'core_updates', 'plugin_updates', 'theme_updates', 'file_perms', 'db_reporting', 'php_reporting', 'versions', 'admin'];
-var securityIssues_fixes = ['listing', 'wp_version', 'rsd', 'wlw', 'core_updates', 'plugin_updates', 'theme_updates', 'db_reporting', 'php_reporting', 'versions', 'admin', 'readme'];
+var securityIssues_fixes = ['listing', 'wp_version', 'rsd', 'wlw', 'core_updates', 'plugin_updates', 'theme_updates', 'db_reporting', 'php_reporting', 'versions', 'registered_versions', 'admin', 'readme'];
 jQuery(document).ready(function () {
     var securityIssueSite = jQuery('#securityIssueSite');
     if ((securityIssueSite.val() != null) && (securityIssueSite.val() != "")) {
@@ -2688,7 +2688,7 @@ mainwp_managesites_add = function (event) {
 
 mainwp_managesites_sync_extension_start_next = function(siteId)
 {
-    while ((pluginToInstall = jQuery('.sync-ext-row[status="queue"]:first')) && (pluginToInstall.length > 0)  && (bulkInstallCurrentThreads < bulkInstallMaxThreads))
+    while ((pluginToInstall = jQuery('.sync-ext-row[status="queue"]:first')) && (pluginToInstall.length > 0)  && (bulkInstallCurrentThreads <  1 /* bulkInstallMaxThreads // to fix install plugins and apply settings failed issue */ ))
     {
         mainwp_managesites_sync_extension_start_specific(pluginToInstall, siteId);
     }
@@ -3438,7 +3438,7 @@ updateCategoriesPostFunc = function()
 };
 
 jQuery(document).on('keydown', 'form[name="post"]', function(event) {
-    if (event.keyCode == 13 && event.srcElement.tagName.toLowerCase() == "input")
+    if (event.keyCode == 13 && event.srcElement && event.srcElement.tagName.toLowerCase() == "input")
     {
         event.preventDefault();
     }
@@ -6315,11 +6315,11 @@ jQuery(document).ready(function () {
         jQuery('#mainwp_bulk_user_action_apply').attr('disabled', 'true');
         jQuery('#mainwp_btn_update_user').attr('disabled', 'true');
 
-        tmp.each(
-            function (index, elem) {
-                mainwpuser_postAction(elem, 'update_user');
-            }
-        );
+            tmp.each(
+                function (index, elem) {
+                    mainwpuser_postAction(elem, 'update_user');
+                }
+            );
 
         return false;
     });
@@ -6352,7 +6352,7 @@ mainwpuser_postAction = function (elem, what) {
         userId:userId,
         userName:userName,
         websiteId:websiteId,
-        update_password: jQuery('#pass1').val()
+        update_password: encodeURIComponent( jQuery('#pass1').val() )
     });
 
     if (what == 'update_user') {

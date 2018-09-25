@@ -578,6 +578,9 @@ public static function renderFooter( $shownPage ) {
 	}
 
 	public static function getMainwpVersion() {
+//        if ( session_id() == '' ) {
+//            session_start();
+//        }
 		if ( ( isset( $_SESSION['cachedVersion'] ) ) && ( NULL !== $_SESSION['cachedVersion'] ) && ( ( $_SESSION['cachedTime'] + ( 60 * 30 ) ) > time() ) ) {
 			return $_SESSION['cachedVersion'];
 		}

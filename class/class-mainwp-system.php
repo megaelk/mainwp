@@ -1202,7 +1202,7 @@ class MainWP_System {
                                      <div><a href="http://mainwp.com/help/docs/managing-themes-with-mainwp/themes-auto-updates/" style="color:#446200" target="_blank">http://mainwp.com/help/docs/managing-themes-with-mainwp/themes-auto-updates/</a></div>
                                      <div><a href="http://mainwp.com/help/docs/auto-update-wordpress-core/" style="color:#446200" target="_blank">http://mainwp.com/help/docs/auto-update-wordpress-core/</a></div>';
                         }
-						wp_mail( $email, $mail_title = 'MainWP - Trusted Updates', MainWP_Utility::formatEmail( $email, $mail, $mail_title, true ), array(
+						wp_mail( $email, $mail_title = 'MainWP - Trusted Updates', MainWP_Utility::formatEmail( $email, $mail, $mail_title, $text_format ), array(
 							'From: "' . get_option( 'admin_email' ) . '" <' . get_option( 'admin_email' ) . '>',
 							'content-type: text/html',
 						) );

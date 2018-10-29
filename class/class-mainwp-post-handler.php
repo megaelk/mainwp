@@ -238,12 +238,12 @@ class MainWP_Post_Handler {
 		$this->addAction( 'mainwp_recheck_http', array( &$this, 'mainwp_recheck_http' ) );
 		$this->addAction( 'mainwp_ignore_http_response', array( &$this, 'mainwp_ignore_http_response' ) );
 		$this->addAction( 'mainwp_disconnect_site', array( &$this, 'ajax_disconnect_site' ) );
-		
+
 		MainWP_Extensions::initAjaxHandlers();
 
 		add_action( 'wp_ajax_mainwp_childscan', array( &$this, 'mainwp_childscan' ) ); //ok
 		add_action( 'wp_ajax_mainwp_get_blogroll', array( &$this, 'mainwp_get_blogroll' ) );
-		
+
 	}
 
 	function mainwp_childscan() {
@@ -598,6 +598,7 @@ class MainWP_Post_Handler {
 
 		if ( 'last_sync_sites' == $_POST['status'] ) {
 			update_option( 'mainwp_last_synced_all_sites', time() );
+            do_action( 'mainwp_synced_all_sites' );
 			die( 'ok' );
 		}
 
@@ -693,7 +694,7 @@ class MainWP_Post_Handler {
 					foreach ( $twitters as $timeid => $twit_mess ) {
 						if ( ! empty( $twit_mess ) ) {
 							$sendText = MainWP_Twitter::getTwitToSend( $_POST['actionName'], $timeid );
-							$html .= '<div class="mainwp-tips mainwp-notice mainwp-notice-blue twitter"><span class="mainwp-tip" twit-what="' . $_POST['actionName'] . '" twit-id="' . $timeid . '">' . $twit_mess . '</span>&nbsp;' . MainWP_Twitter::genTwitterButton( $sendText, false ) . '<span><a href="#" class="mainwp-dismiss-twit mainwp-right" ><i class="fa fa-times-circle"></i> ' . __( 'Dismiss', 'mainwp' ) . '</a></span></div>';
+							$html .= '<div class="mainwp-tips mainwp-notice mainwp-notice-blue twitter"><span class="mainwp-tip" twit-what="' . esc_attr($_POST['actionName']) . '" twit-id="' . $timeid . '">' . $twit_mess . '</span>&nbsp;' . MainWP_Twitter::genTwitterButton( $sendText, false ) . '<span><a href="#" class="mainwp-dismiss-twit mainwp-right" ><i class="fa fa-times-circle"></i> ' . __( 'Dismiss', 'mainwp' ) . '</a></span></div>';
 						}
 					}
 				}
@@ -772,32 +773,32 @@ class MainWP_Post_Handler {
 		}
 	}
 
-	
+
 	public function ajax_disconnect_site() {
-		$this->secure_request( 'mainwp_disconnect_site' );    
-		
-        $siteid = $_POST['websiteId'];	
-					
+		$this->secure_request( 'mainwp_disconnect_site' );
+
+        $siteid = $_POST['websiteId'];
+
 		if ( empty( $siteid ) ) {
-			die( json_encode( array( 'error' => 'Error: site id empty' ) ) ); 			
+			die( json_encode( array( 'error' => 'Error: site id empty' ) ) );
 		}
-		
+
 		$website = MainWP_DB::Instance()->getWebsiteById( $siteid );
-		
+
 		if ( ! $website ) {
-			die( json_encode( array( 'error' => 'Not found site' ) ) ); 
+			die( json_encode( array( 'error' => 'Not found site' ) ) );
 		}
-		
-		try {			
+
+		try {
 			$information = MainWP_Utility::fetchUrlAuthed( $website, 'disconnect');
 		} catch ( Exception $e ) {
 			$information = array( 'error' => __( 'fetchUrlAuthed exception', 'mainwp' ) );
 		}
-		
+
 		die( json_encode( $information ) );
     }
 
-	
+
 	/**
 	 * Page: CloneSite
 	 */
@@ -837,8 +838,8 @@ class MainWP_Post_Handler {
 			) ) );
 		}
 	}
-	
-	
+
+
 	function mainwp_backup() {
 		$this->secure_request( 'mainwp_backup' );
 
@@ -1375,10 +1376,10 @@ class MainWP_Post_Handler {
 
 	//todo: rename
 	function mainwp_upgradeplugintheme() {
-		
+
 		if (!isset($_POST['type']))
 			die( json_encode( array( 'error' => __( 'Invalid request!', 'mainwp' ) ) ) );
-		
+
 		if ( $_POST['type'] == 'plugin' && ! mainwp_current_user_can( 'dashboard', 'update_plugins' ) ) {
 			die( json_encode( array( 'error' => mainwp_do_not_have_permissions( __( 'update plugins', 'mainwp' ), $echo = false ) ) ) );
 		}
@@ -1392,61 +1393,61 @@ class MainWP_Post_Handler {
 		}
 
 		$this->secure_request( 'mainwp_upgradeplugintheme' );
-		
+
 		// at the moment: support chunk update for manage sites page only
-		$chunk_support = isset($_POST['chunk_support']) && $_POST['chunk_support'] ? true : false;		
+		$chunk_support = isset($_POST['chunk_support']) && $_POST['chunk_support'] ? true : false;
 		$max_update = 0;
-		$websiteId = null;		
+		$websiteId = null;
 		$slugs     = '';
 		if ( isset( $_POST['websiteId'] ) ) {
 			$websiteId = $_POST['websiteId'];
-			
+
 			if ($chunk_support) {
 				$max_update = apply_filters('mainwp_update_plugintheme_max', false, $websiteId );
 				if (empty($max_update)) {
 					$chunk_support = false; // there is not hook so disable chunk update support
 				}
-			}			
+			}
 			if ( $chunk_support ) {
 				if (isset($_POST['chunk_slugs'])) {
 					$slugs = $_POST['chunk_slugs'];  // chunk slugs send so use this
 				} else {
-					$slugs = MainWP_Right_Now::getPluginThemeSlugs( $websiteId, $_POST['type'] );				
+					$slugs = MainWP_Right_Now::getPluginThemeSlugs( $websiteId, $_POST['type'] );
 				}
 			} else if ( isset( $_POST['slug'] ) ) {
 				$slugs = $_POST['slug'];
 			} else {
-				$slugs = MainWP_Right_Now::getPluginThemeSlugs( $websiteId, $_POST['type'] );				
+				$slugs = MainWP_Right_Now::getPluginThemeSlugs( $websiteId, $_POST['type'] );
 			}
 		}
-		
+
 		if ( MainWP_DB::Instance()->backupFullTaskRunning( $websiteId ) ) {
 			die( json_encode( array( 'error' =>  __( 'Backup process in progress on the child site. Please, try again later.', 'mainwp' ) ) ) );
 		}
-		
+
 		$chunk_slugs = array();
-		
-		if ( $chunk_support ){		
+
+		if ( $chunk_support ){
 			// calculate update slugs here
 			if ( $max_update ) {
 				$slugs = explode(",", $slugs);
-				$chunk_slugs = array_slice($slugs, $max_update);	
+				$chunk_slugs = array_slice($slugs, $max_update);
 				$update_slugs = array_diff($slugs, $chunk_slugs);
 				$slugs = implode(",", $update_slugs);
-			}			
+			}
 		}
-		
+
 		if ( empty( $slugs ) && ! $chunk_support ) {
 			die( json_encode( array( 'message' => __( 'Item slug could not be found. Update process could not be executed.', 'mainwp' ) ) ) );
 		}
 		$website = MainWP_DB::Instance()->getWebsiteById( $websiteId );
-		try {			
+		try {
 			$info = array( 'result' => MainWP_Right_Now::upgradePluginThemeTranslation( $websiteId, $_POST['type'], $slugs ) );
-			
+
 			if ( $chunk_support && (count($chunk_slugs) > 0) ) {
-				$info['chunk_slugs'] = implode(",", $chunk_slugs);				
+				$info['chunk_slugs'] = implode(",", $chunk_slugs);
 			}
-			
+
 			if (!empty($website)) {
 				$info['site_url'] = esc_url($website->url);
 			}

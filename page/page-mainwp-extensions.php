@@ -294,19 +294,19 @@ class MainWP_Extensions {
                     if ( MainWP_System::is_disable_menu_item(2, $extension['direct_page']) )
                             continue;
 
-					$html .= '<a href="' . admin_url( 'admin.php?page=' . $extension['direct_page'] ) . '"
+					$html .= '<a href="' . admin_url( 'admin.php?page=' . esc_url_raw( $extension['direct_page'] ) ) . '"
 							   class="mainwp-submenu">' . str_replace( array(
 							'Extension',
 							'MainWP',
-						), '', $extension['name'] ) . '</a>';
+						), '', esc_html( $extension['name'] ) ) . '</a>';
 				} else {
                     if ( MainWP_System::is_disable_menu_item(2, $extension['page']) )
                             continue;
-					$html .= '<a href="' . admin_url( 'admin.php?page=' . $extension['page'] ) . '"
+					$html .= '<a href="' . admin_url( 'admin.php?page=' . esc_url_raw( $extension['page']) ) . '"
 							   class="mainwp-submenu">' . str_replace( array(
 							'Extension',
 							'MainWP',
-						), '', $extension['name'] ) . '</a>';
+						), '', esc_html( $extension['name'] ) ) . '</a>';
 				}
 			}
 		}
@@ -414,7 +414,9 @@ class MainWP_Extensions {
 
 		$snMenuExtensions[] = $slug;
 
-		return MainWP_Utility::update_option( 'mainwp_extmenu', $snMenuExtensions );
+		MainWP_Utility::update_option( 'mainwp_extmenu', $snMenuExtensions );
+        do_action('mainwp_added_extension_menu', $slug);
+        return true;
 	}
 
 	public static function activateExtension() {
@@ -822,7 +824,7 @@ class MainWP_Extensions {
 		}
 
 		MainWP_Utility::update_option( 'mainwp_extmenu', $snMenuExtensions );
-
+        do_action('mainwp_removed_extension_menu', $_POST['slug']);
 		die( json_encode( array( 'result' => 'SUCCESS' ) ) );
 	}
 

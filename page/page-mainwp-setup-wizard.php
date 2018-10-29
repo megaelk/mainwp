@@ -711,7 +711,7 @@ class MainWP_Setup_Wizard {
 		<h1><?php _e( 'MainWP Login', 'mainwp' ); ?></h1>
 
 		<p><?php echo __('Log into your MainWP account to auto install your new Extension.', 'mainwp'); ?></p>
-		<p><?php echo $ext_name; ?></p>
+		<p><?php echo esc_html($ext_name); ?></p>
 		<?php
 		if (!empty($message)) {
 			delete_option('mwp_setup_message_purchase_extension');
@@ -994,12 +994,12 @@ class MainWP_Setup_Wizard {
 	                    </span>
 						<script type="text/javascript">
 							jQuery(document).ready(function () {
-								mainwp_setup_grab_extension(false, <?php echo $register_later; ?>);
+								mainwp_setup_grab_extension(false, <?php echo esc_attr($register_later); ?>);
 							})
 						</script>
 					</div>
 					<div id="mwp_setup_extension_retry_install" style="display: none;"><p><span class="mwp_setup_loading_wrap">
-	                    <input type="button" value="Retry Install Extension" onclick="this.disabled = true;mainwp_setup_grab_extension(false, <?php echo $register_later; ?>); return false;" id="mwp_setup_extension_install_btn" class="mainwp-upgrade-button button-primary">
+	                    <input type="button" value="Retry Install Extension" onclick="this.disabled = true;mainwp_setup_grab_extension(false, <?php echo esc_attr($register_later); ?>); return false;" id="mwp_setup_extension_install_btn" class="mainwp-upgrade-button button-primary">
 	                        <i style="display: none;" class="fa fa-spinner fa-pulse"></i><span class="status hidden"></span>
 	                    </span></p>
 					</div>
@@ -1074,8 +1074,8 @@ class MainWP_Setup_Wizard {
 									$_selected = 'checked'; }
 								?>
 								<li>
-									<input type="checkbox" id="mainwp_hide_wpmenu_<?php echo $name; ?>" name="mainwp_hide_wpmenu[]" <?php echo $_selected; ?> value="<?php esc_attr_e($name); ?>">
-									<label for="mainwp_hide_wpmenu_<?php echo $name; ?>"><?php echo $item; ?></label>
+									<input type="checkbox" id="mainwp_hide_wpmenu_<?php echo esc_attr( $name ); ?>" name="mainwp_hide_wpmenu[]" <?php echo $_selected; ?> value="<?php echo esc_attr($name); ?>">
+									<label for="mainwp_hide_wpmenu_<?php echo esc_attr( $name ); ?>"><?php echo esc_html( $item ); ?></label>
 								</li>
 							<?php }
 							?>
@@ -1165,7 +1165,7 @@ class MainWP_Setup_Wizard {
 					<tr>
 						<th scope="row"><?php _e("Your Uptime Robot API Key:", "mainwp"); ?></th>
 						<td>
-							<input type="text" readonly = "readonly" class="" value="<?php echo $ur_api_key; ?>" size="35" name="mwp_setup_uptime_robot_api_key">
+							<input type="text" readonly = "readonly" class="" value="<?php echo esc_attr($ur_api_key); ?>" size="35" name="mwp_setup_uptime_robot_api_key">
 						</td>
 					</tr>
 					<tr>

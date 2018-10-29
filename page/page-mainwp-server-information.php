@@ -96,7 +96,7 @@ class MainWP_Server_Information {
                                         continue;
 
 							?>
-                                <a href="<?php echo admin_url( 'admin.php?page=Server'.$subPage['slug'] ); ?>" class="mainwp-submenu"><?php echo $subPage['title']; ?></a>
+                                <a href="<?php echo admin_url( 'admin.php?page=Server'.$subPage['slug'] ); ?>" class="mainwp-submenu"><?php echo esc_html($subPage['title']); ?></a>
 							<?php
 							}
 						}
@@ -286,8 +286,8 @@ public static function renderFooter( $shownPage ) {
 				?>
 				<tr>
                                         <td class="mwp-not-generate-row"><?php MainWP_Utility::renderToolTip( $extension['description'] ); ?></td>
-					<td><?php echo $extension['name']; ?></td>
-					<td><?php echo $extension['version']; ?></td>
+					<td><?php echo esc_html($extension['name']); ?></td>
+					<td><?php echo esc_html($extension['version']); ?></td>
 					<td><?php echo $extension['activated_key'] == 'Activated' ? __( 'Active', 'mainwp' ) : __( 'Inactive', 'mainwp' ); ?></td>
 					<td><?php echo $extension['activated_key'] == 'Activated' ? '<span class="mainwp-pass"><i class="fa fa-check-circle"></i> ' . __( 'Pass', 'mainwp' ) . '</span>' : self::getWarningHTML( self::WARNING ); ?></td>
 				</tr>
@@ -518,8 +518,8 @@ public static function renderFooter( $shownPage ) {
 				?>
 				<tr>
                                     <td class="mwp-not-generate-row"><?php MainWP_Utility::renderToolTip( $plugin['Description'] ); ?></td>
-					<td><?php echo $plugin['Name']; ?></td>
-					<td><?php echo $plugin['Version']; ?></td>
+					<td><?php echo esc_html($plugin['Name']); ?></td>
+					<td><?php echo esc_html($plugin['Version']); ?></td>
 					<td><?php echo is_plugin_active($slug) ? __( 'Active', 'mainwp' ) : __( 'Inactive', 'mainwp' ); ?></td>
 					<td>&nbsp;</td>
 				</tr>

@@ -1345,7 +1345,7 @@ public static function renderFooter( $shownPage ) {
 			$lines[ $key ] = compact( 'time', 'error' );
 		}
 
-		if ( count( $error_log ) > 1 ) {
+		if ( count( $lines ) > 1 ) {
 
 			uasort( $lines, array( __CLASS__, 'time_compare' ) );
 			$lines = array_slice( $lines, 0, $count );

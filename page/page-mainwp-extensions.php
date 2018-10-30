@@ -109,7 +109,7 @@ class MainWP_Extensions {
 			$extension['version']          = $plugin_data['Version'];
 			$extension['description']      = $plugin_data['Description'];
 			$extension['author']           = $plugin_data['Author'];
-			$extension['iconURI']          = $file_data['IconURI'];
+			$extension['iconURI']          = isset($extension['icon']) ? $extension['icon'] : $file_data['IconURI'];
 			$extension['SupportForumURI']  = $file_data['SupportForumURI'];
 			$extension['DocumentationURI'] = $file_data['DocumentationURI'];
 			$extension['page']             = 'Extensions-' . str_replace( ' ', '-', ucwords( str_replace( '-', ' ', dirname( $slug ) ) ) );

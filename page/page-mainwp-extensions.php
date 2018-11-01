@@ -425,14 +425,16 @@ class MainWP_Extensions {
 		$api_key   = trim( $_POST['key'] );
 		$api_email = trim( $_POST['email'] );
 		$result    = MainWP_Api_Manager::instance()->license_key_activation( $api, $api_key, $api_email );
-		die( json_encode( $result ) );
+		//die( json_encode( $result ) );
+         wp_send_json( $result );
 	}
 
 	public static function deactivateExtension() {
 		MainWP_System::Instance()->posthandler->secure_request( 'mainwp_extension_deactivate' );
 		$api    = dirname( $_POST['slug'] );
 		$result = MainWP_Api_Manager::instance()->license_key_deactivation( $api );
-		die( json_encode( $result ) );
+		//die( json_encode( $result ) );
+        wp_send_json( $result );
 	}
 
 
@@ -441,7 +443,8 @@ class MainWP_Extensions {
 		$password = trim( $_POST['password'] );
 		$api      = dirname( $_POST['slug'] );
 		$result   = MainWP_Api_Manager::instance()->grab_license_key( $api, $username, $password );
-		die( json_encode( $result ) );
+		//die( json_encode( $result ) );
+        wp_send_json( $result );
 	}
 
 	public static function saveExtensionsApiLogin() {
@@ -777,7 +780,7 @@ class MainWP_Extensions {
 				}
 				$thePlugin = get_plugin_data( $path . $srcFile );
 				if ( $thePlugin != null && $thePlugin != '' && $thePlugin['Name'] != '' ) {
-					$output .= __( 'Successfully installed the plugin', 'mainwp' ) . ' ' . $thePlugin['Name'] . ' ' . $thePlugin['Version'];
+					$output .= __( 'Successfully installed the plugin', 'mainwp' ) . ' ' . esc_html( $thePlugin['Name'] ) . ' ' . esc_html( $thePlugin['Version'] );
 					$plugin_slug = $result['destination_name'] . '/' . $srcFile;
 					if ( $activatePlugin ) {
 						activate_plugin( $path . $srcFile, '', false, true );
@@ -793,7 +796,7 @@ class MainWP_Extensions {
 		} else {
 			$return['result'] = 'SUCCESS';
 			$return['output'] = $output;
-			$return['slug']   = $plugin_slug;
+			$return['slug']   = esc_html( $plugin_slug );
 		}
 
 		return $return;

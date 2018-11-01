@@ -182,7 +182,8 @@ class MainWP_Install_Bulk {
 			'InstallPluginTheme_handler',
 		), $output, null, array( 'upgrade' => true ) );
 
-		die( json_encode( $output ) );
+		//die( json_encode( $output ) );
+        wp_send_json( $output );
 	}
 
 	public static function prepareUpload() {
@@ -232,7 +233,8 @@ class MainWP_Install_Bulk {
 		$output['urls'] = implode( '||', $output['urls'] );
 		$output['urls'] = apply_filters( 'mainwp_installbulk_prepareupload', $output['urls'] );
 
-		die( json_encode( $output ) );
+		//die( json_encode( $output ) );
+        wp_send_json( $output );
 	}
 
 	public static function performUpload() {
@@ -258,7 +260,9 @@ class MainWP_Install_Bulk {
 			MainWP_Install_Bulk::getClassName(),
 			'InstallPluginTheme_handler',
 		), $output, null, array( 'upgrade' => true ) );
-		die( json_encode( $output ) );
+        
+		//die( json_encode( $output ) );
+        wp_send_json( $output );
 	}
 
 	public static function cleanUpload() {

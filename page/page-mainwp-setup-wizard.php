@@ -868,11 +868,11 @@ class MainWP_Setup_Wizard {
 				} else {
 					$error = false;
 					$product_info = $purchased_data[$product_id];
-					$software_title = isset($all_available_exts[$product_id]) ? $all_available_exts[$product_id]['title'] : $product_id;
+					$software_title = isset($all_available_exts[$product_id]) ? esc_html( $all_available_exts[$product_id]['title'])  : esc_html( $product_id );
 					$error_message = '';
 					if (isset($product_info['package']) && !empty($product_info['package'])){
 						$package_url = apply_filters('mainwp_api_manager_upgrade_url', $product_info['package']);
-						$html .= '<div class="extension_to_install" download-link="' . $package_url . '" product-id="' . $product_id . '"><span class="name">Installing <strong>' . $software_title . "</strong> ...</span> " . '<span class="ext_installing" status="queue"><i class="fa fa-spinner fa-pulse hidden" style="display: none;"></i> <span class="status hidden"><i class="fa fa-clock-o"></i> ' . __('Queued', 'mainwp') . '</span></span></div>';
+						$html .= '<div class="extension_to_install" download-link="' . esc_attr( $package_url ) . '" product-id="' . esc_attr( $product_id ) . '"><span class="name">Installing <strong>' . $software_title . "</strong> ...</span> " . '<span class="ext_installing" status="queue"><i class="fa fa-spinner fa-pulse hidden" style="display: none;"></i> <span class="status hidden"><i class="fa fa-clock-o"></i> ' . __('Queued', 'mainwp') . '</span></span></div>';
 					} else if (isset($product_info['error'])  && !empty($product_info['error'])) {
 						$error = true;
 						$error_message = MainWP_Api_Manager::instance()->check_response_for_intall_errors($product_info, $software_title);
@@ -932,7 +932,8 @@ class MainWP_Setup_Wizard {
 		$password = !empty($enscrypt_p) ? MainWP_Api_Manager_Password_Management::decrypt_string($enscrypt_p) : "";
 		$api = isset($_POST['slug']) ? dirname($_POST['slug']) : '';
 		$result = MainWP_Api_Manager::instance()->grab_license_key($api, $username, $password);
-		die(json_encode($result));
+		//die(json_encode($result));
+        wp_send_json( $result );
 	}
 
 	public function mwp_setup_install_extension() {
@@ -970,7 +971,7 @@ class MainWP_Setup_Wizard {
 		<h1><?php _e( 'Install and Activate', 'mainwp' ); ?></h1>
 		<form method="post">
 			<div class="mwp_setup_install_extension_content">
-				<?php echo !empty($ext_name) ? '<p>' . $ext_name . '</p>' : ""; ?>
+				<?php echo !empty($ext_name) ? '<p>' . esc_html( $ext_name ) . '</p>' : ""; ?>
 				<input type="hidden" name="mwp_setup_extension_product_id" id="mwp_setup_extension_product_id" value="<?php echo esc_attr($ext_product_id); ?>" slug="<?php echo esc_attr($ext_slug); ?>">
 				<?php
 				if ($ext_installed) {

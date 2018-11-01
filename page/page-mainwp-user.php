@@ -819,7 +819,7 @@ class MainWP_User {
 					<input class="userName" type="hidden" name="name" value="<?php echo esc_attr($user['login']); ?>"/>
 					<input class="websiteId" type="hidden" name="id"
 						value="<?php echo esc_attr($website->id); ?>"/>
-					<?php echo !empty($user['display_name']) ? $user['display_name'] : '&nbsp;' ; ?>
+					<?php echo !empty($user['display_name']) ? esc_html($user['display_name']) : '&nbsp;' ; ?>
 					<div class="row-actions">
                     <span class="edit"><a class="user_getedit"
 		                    href="#"
@@ -883,9 +883,10 @@ class MainWP_User {
 		die( json_encode( array( 'result' => 'User has been deleted' ) ) );
 	}
 
-        public static function edit() {
+    public static function edit() {
 		$information = MainWP_User::action( 'edit' );
-		die( json_encode( $information ) );
+		//die( json_encode( $information ) );
+        wp_send_json( $information );
 	}
 
         public static function updateUser() {
@@ -947,7 +948,8 @@ class MainWP_User {
 		}
 
                 if (is_array($information) && isset($information['error'])) {
-                        die( json_encode( array( 'error' => $information['error'] ) ) );
+                        //die( json_encode( array( 'error' => $information['error'] ) ) );
+                        wp_send_json( array( 'error' => $information['error'] ) );
                 }
 
 		if ( ! isset( $information['status'] ) || ( $information['status'] != 'SUCCESS' ) ) {
@@ -1509,7 +1511,7 @@ class MainWP_User {
                             'http_pass'
 						) );
 					} else {
-						$not_valid[] = __( "Error - The website doesn't exist in the Network.", 'mainwp' ) . " " . $url;;
+						$not_valid[] = __( "Error - The website doesn't exist in the Network.", 'mainwp' ) . " " . $url;
 						$error_sites .= $url . ';';
 					}
 				}
@@ -1561,9 +1563,9 @@ class MainWP_User {
 		$ret['ok_list'] = $ret['error_list'] = array();
 		foreach ( $dbwebsites as $website ) {
 			if ( isset( $output->ok[ $website->id ] ) && $output->ok[ $website->id ] == 1 ) {
-				$ret['ok_list'][] = 'New user(s) created: ' . stripslashes( $website->name );
+				$ret['ok_list'][] = 'New user(s) created: ' . esc_html( stripslashes( $website->name ) );
 			} else {
-				$ret['error_list'][] = $output->errors[ $website->id ] . ' ' . stripslashes( $website->name );
+				$ret['error_list'][] = esc_html( $output->errors[ $website->id ] . ' ' . stripslashes( $website->name ) );
 				$error_sites .= $website->url . ';';
 			}
 		}
@@ -1575,11 +1577,12 @@ class MainWP_User {
 		$ret['failed_logging'] = '';
 		if ( ! empty( $error_sites ) ) {
 			$error_sites           = rtrim( $error_sites, ';' );
-			$ret['failed_logging'] = $_POST['user_login'] . ',' . $_POST['email'] . ',' . $_POST['first_name'] . ',' . $_POST['last_name'] . ',' . $_POST['url'] . ',' . $_POST['pass1'] . ',' . intval( $_POST['send_password'] ) . ',' . $_POST['role'] . ',' . $error_sites . ',';
+			$ret['failed_logging'] = esc_html( $_POST['user_login'] . ',' . $_POST['email'] . ',' . $_POST['first_name'] . ',' . $_POST['last_name'] . ',' . $_POST['url'] . ',' . $_POST['pass1'] . ',' . intval( $_POST['send_password'] ) . ',' . $_POST['role'] . ',' . $error_sites . ',' );
 		}
 
-		$ret['line_number'] = $_POST['line_number'];
-		die( json_encode( $ret ) );
+		$ret['line_number'] = intval($_POST['line_number']);
+
+        wp_send_json($ret);
 	}
 
 }

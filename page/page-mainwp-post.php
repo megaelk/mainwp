@@ -1077,7 +1077,6 @@ public static function renderHeader( $shownPage, $post_id = null ) {
 					$id   = $_GET['id'];
 					$post = get_post( $id );
 					if ( $post ) {
-						//                die('<pre>'.print_r($post, 1).'</pre>');
 						$selected_by     = get_post_meta( $id, '_selected_by', true );
 						$selected_sites  = unserialize( base64_decode( get_post_meta( $id, '_selected_sites', true ) ) );
 						$selected_groups = unserialize( base64_decode( get_post_meta( $id, '_selected_groups', true ) ) );

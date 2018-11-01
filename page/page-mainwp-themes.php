@@ -941,7 +941,8 @@ class MainWP_Themes {
 		}
 
         if (isset( $information['error'] )) {
-            die( json_encode( $information ) );
+            //die( json_encode( $information ) );
+            wp_send_json( $information );
         }
 
 		if (  ! isset( $information['status'] ) || ( $information['status'] != 'SUCCESS' ) ) {

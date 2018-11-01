@@ -395,7 +395,7 @@ class MainWP_Plugins_Install_List_Table extends WP_List_Table {
 				</div>
 				<div class="desc column-description" style="margin-right: 0!important;">
 					<p><?php echo esc_html($description); ?></p>
-					<p class="authors"><?php echo esc_html($author); ?></p>
+					<p class="authors"><?php echo $author; ?></p>
 				</div>
 			</div>
 			<div class="plugin-card-bottom">

@@ -1579,7 +1579,7 @@ class MainWP_Manage_Sites {
 				$ret['response'] = $e->getMessage();
 			}
 		}
-		$ret['check_me'] = ( isset( $_POST['check_me'] ) ? $_POST['check_me'] : null );
+		$ret['check_me'] = ( isset( $_POST['check_me'] ) ? intval( $_POST['check_me'] ) : null );
 		die( json_encode( $ret ) );
 	}
 
@@ -1616,7 +1616,7 @@ class MainWP_Manage_Sites {
 			list( $message, $error, $site_id ) = MainWP_Manage_Sites_View::addSite( $website );
 		}
 
-		$ret['add_me'] = ( isset( $_POST['add_me'] ) ? $_POST['add_me'] : null );
+		$ret['add_me'] = ( isset( $_POST['add_me'] ) ? intval($_POST['add_me']) : null );
 		if ( $error != '' ) {
 			$ret['response'] = 'ERROR ' . $error;
 			die( json_encode( $ret ) );

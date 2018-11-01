@@ -888,7 +888,7 @@ class MainWP_Plugins {
 							echo '<td class="long" style="text-align: center">';
                             if ( isset( $sitePlugins[ $site_id ] ) && isset( $sitePlugins[ $site_id ][ $plugin_name ] ) && ( $muPlugins[ $plugin_name ] == 0 ) ) {
                                 if ( !isset($pluginsMainWP[$plugin_name]) || $pluginsMainWP[$plugin_name] === 'F' ) {
-                                    echo '<input type="checkbox" value="' . $plugins[ $plugin_name ] . '" name="' . $pluginsName[ $plugin_name ] . '" class="selected_plugin" version="' . $pluginsRealVersion[$plugin_name] . '" />';
+                                    echo '<input type="checkbox" value="' . esc_attr($plugins[ $plugin_name ]) . '" name="' . esc_attr( $pluginsName[ $plugin_name ] ) . '" class="selected_plugin" version="' . esc_attr( $pluginsRealVersion[$plugin_name] ) . '" />';
                                 } else if ( isset($pluginsMainWP[$plugin_name]) && $pluginsMainWP[$plugin_name] === 'T' ) {
                                     echo '<i class="fa fa-check-circle-o" aria-hidden="true"></i>';
                                 }

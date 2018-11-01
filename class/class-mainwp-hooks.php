@@ -439,7 +439,12 @@ class MainWP_Hooks {
 						'type' => $type,
 						'list' => urldecode( implode( ',', $slugs ) ),
 					) );
-					die( json_encode( $information ) );
+
+                    if (isset($information['sync'])) 
+                        unset($information['sync']);
+
+					//die( json_encode( $information ) );
+                    wp_send_json( $information );
 				}
 			}
 		} catch ( MainWP_Exception $e ) {

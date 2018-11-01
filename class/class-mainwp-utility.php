@@ -2974,7 +2974,7 @@ EOT;
         } else {
             $content = wp_kses_post( $content );
         }
-        
+
         return $content;
     }
 

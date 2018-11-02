@@ -904,7 +904,7 @@ class MainWP_Setup_Wizard {
 	public static function ajax_download_and_install() {
 		self::secure_request();
 		$return = MainWP_Extensions::installPlugin($_POST['download_link'], true);
-		die('<mainwp>' . json_encode($return) . '</mainwp>');
+		die('<mainwp>' . json_encode($return) . '</mainwp>'); // ok
 	}
 
 	public static function secure_request() {

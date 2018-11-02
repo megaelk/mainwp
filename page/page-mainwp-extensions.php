@@ -489,7 +489,8 @@ class MainWP_Extensions {
 		}
 
 		if ( is_array( $test ) && isset( $test['retry_action'] ) ) {
-			die( json_encode( $test ) );
+			//die( json_encode( $test ) );
+            wp_send_json( $test );
 		}
 
 		$result     = json_decode( $test, true );
@@ -544,7 +545,8 @@ class MainWP_Extensions {
 		}
 
 		if ( is_array( $test ) && isset( $test['retry_action'] ) ) {
-			die( json_encode( $test ) );
+			//die( json_encode( $test ) );
+            wp_send_json( $test );
 		}
 
 		$result = json_decode( $test, true );
@@ -562,7 +564,8 @@ class MainWP_Extensions {
 				$return['retry_action'] = 1;
 			}
 		}
-		die( json_encode( $return ) );
+		//die( json_encode( $return ) );
+        wp_send_json( $return );
 	}
 
 
@@ -692,7 +695,8 @@ class MainWP_Extensions {
 				$return['retry_action'] = 1;
 			}
 		}
-		die( json_encode( $return ) );
+		//die( json_encode( $return ) );
+        wp_send_json( $return );
 	}
 
 	public static function http_request_reject_unsafe_urls( $r, $url ) {
@@ -719,7 +723,7 @@ class MainWP_Extensions {
 		MainWP_System::Instance()->posthandler->secure_request( 'mainwp_extension_downloadandinstall' );
         ini_set("zlib.output_compression", "Off"); // to fix bug
 		$return = self::installPlugin( $_POST['download_link'] );
-		die( '<mainwp>' . json_encode( $return ) . '</mainwp>' );
+		die( '<mainwp>' . json_encode( $return ) . '</mainwp>' ); //ok
 	}
 
 	public static function installPlugin( $url, $activatePlugin = false ) {

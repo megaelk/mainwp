@@ -1431,7 +1431,8 @@ public static function renderHeader( $shownPage, $post_id = null ) {
 				update_post_meta( $ret['id'], '_selected_sites', base64_encode( serialize( array($websiteId) ) ) );
 				update_post_meta( $ret['id'], '_mainwp_edit_post_site_id', $websiteId );
 			}
-			die( json_encode( $ret ) );
+			//die( json_encode( $ret ) );
+            wp_send_json( $ret );
 		}
 	}
 

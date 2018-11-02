@@ -429,7 +429,8 @@ class MainWP_Hooks {
 			}
 
 			if ( ! empty( $error ) ) {
-				die( json_encode( array( 'error' => $error ) ) );
+				//die( json_encode( array( 'error' => $error ) ) );
+                wp_send_json( array( 'error' => $error ) );
 			}
 
 			if ( MainWP_Utility::ctype_digit( $websiteId ) ) {
@@ -440,7 +441,7 @@ class MainWP_Hooks {
 						'list' => urldecode( implode( ',', $slugs ) ),
 					) );
 
-                    if (isset($information['sync'])) 
+                    if (isset($information['sync']))
                         unset($information['sync']);
 
 					//die( json_encode( $information ) );

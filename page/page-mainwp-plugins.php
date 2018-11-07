@@ -249,7 +249,7 @@ class MainWP_Plugins {
 					?>
 					<a class="nav-tab pos-nav-tab <?php if ( $shownPage === $subPage['slug'] ) {
 						echo 'nav-tab-active';
-					} ?>" href="admin.php?page=Plugins<?php echo esc_url($subPage['slug']); ?>"><?php echo esc_html($subPage['title']); ?></a>
+					} ?>" href="admin.php?page=Plugins<?php echo esc_attr($subPage['slug']); ?>"><?php echo esc_html($subPage['title']); ?></a>
 					<?php
 				}
 			}

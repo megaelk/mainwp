@@ -506,7 +506,7 @@ class MainWP_System {
 			}
 		}
 
-		$notice = sprintf(__("You have a MainWP Extension that does not have an active API entered.  This means you will not receive updates or support.  Please visit the %sExtensions%s page and enter your API.", 'mainwp'), '<a href="admin.php?page=Extensions">', '</a>');
+		$notice_html = sprintf(__("You have a MainWP Extension that does not have an active API entered.  This means you will not receive updates or support.  Please visit the %sExtensions%s page and enter your API.", 'mainwp'), '<a href="admin.php?page=Extensions">', '</a>');
 		?>
 		<style type="text/css">
 			tr[data-plugin="<?php echo esc_attr($plugin_slug); ?>"] {
@@ -514,7 +514,7 @@ class MainWP_System {
 			}
 		</style>
 		<tr class="plugin-update-tr active" slug="<?php echo esc_attr( $slug ); ?>"><td colspan="3" class="plugin-update colspanchange"><div class="update-message api-deactivate">
-					<?php echo esc_html($notice); ?>
+					<?php echo $notice_html; ?>
 					<span class="mainwp-right"><a href="#" class="mainwp-activate-notice-dismiss" ><i class="fa fa-times-circle"></i> <?php _e( 'Dismiss','mainwp' ); ?></a></span>
 				</div></td></tr>
 		<?php

@@ -294,7 +294,7 @@ class MainWP_Extensions {
                     if ( MainWP_System::is_disable_menu_item(2, $extension['direct_page']) )
                             continue;
 
-					$html .= '<a href="' . admin_url( 'admin.php?page=' . esc_url_raw( $extension['direct_page'] ) ) . '"
+					$html .= '<a href="' . admin_url( 'admin.php?page=' . $extension['direct_page'] ) . '"
 							   class="mainwp-submenu">' . str_replace( array(
 							'Extension',
 							'MainWP',
@@ -302,7 +302,7 @@ class MainWP_Extensions {
 				} else {
                     if ( MainWP_System::is_disable_menu_item(2, $extension['page']) )
                             continue;
-					$html .= '<a href="' . admin_url( 'admin.php?page=' . esc_url_raw( $extension['page']) ) . '"
+					$html .= '<a href="' . admin_url( 'admin.php?page=' . $extension['page'] ) . '"
 							   class="mainwp-submenu">' . str_replace( array(
 							'Extension',
 							'MainWP',

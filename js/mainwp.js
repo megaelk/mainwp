@@ -6582,7 +6582,7 @@ getErrorMessage = function(pError)
         var error = '';
         if (pError.extra)
         {
-            error = __('MainWP Child plugin not detected! First install and activate the MainWP Child plugin and add your site to MainWP Dashboard afterwards. If you continue experiencing this issue please test your connection <a href="admin.php?page=managesites&do=test&site=%1">here</a> or post as much information as possible on the error in the <a href="https://mainwp.com/forum/">support forum</a>.', encodeURIComponent(pError.extra));
+            error = __('MainWP Child plugin not detected! First install and activate the MainWP Child plugin and add your site to MainWP Dashboard afterwards. If you continue experiencing this issue please test your connection <a href="admin.php?page=managesites&do=test&site=%1">here</a> or post as much information as possible on the error in the <a href="https://mainwp.com/forum/">support forum</a>.', pError.extra); // to fix incorrect encoding
         }
         else
         {

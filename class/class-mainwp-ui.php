@@ -548,7 +548,7 @@ class MainWP_UI {
                                     }
                                 }
 
-                                echo "<li class='mainwp-menu-sub-item $active_item $sub_closed " . (empty($icon) ? 'no-icon' : '') . ($has_sub ? ' mainwp-menu-has-submenu' : '') ."' $site_id item-key=\"" . esc_attr($item_key-$sub_key) . "\"><div class='mainwp-menu-name'>" . $icon . "<a href='" . esc_url( $href ) . "'>" . esc_attr($title) . "</a></div>$arrow";
+                                echo "<li class='mainwp-menu-sub-item $active_item $sub_closed " . (empty($icon) ? 'no-icon' : '') . ($has_sub ? ' mainwp-menu-has-submenu' : '') ."' $site_id item-key=\"" . esc_attr("$item_key-$sub_key") . "\"><div class='mainwp-menu-name'>" . $icon . "<a href='" . esc_url( $href ) . "'>" . esc_attr($title) . "</a></div>$arrow";
                                 if ($has_sub) {
                                     self::render_sub_sub_left_menu($sub_key, $item_key );
                                 }

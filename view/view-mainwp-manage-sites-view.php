@@ -490,7 +490,7 @@ class MainWP_Manage_Sites_View {
 					<td>
 						<input type="text" id="mainwp_managesites_test_wpurl"
 							   name="mainwp_managesites_add_wpurl"
-							   value="<?php if ( isset( $_REQUEST['site'] ) ) {echo esc_attr( $_REQUEST['site'] );} ?>" autocompletelist="mainwp-test-sites" class="mainwp_autocomplete" />
+                               value="<?php if ( isset( $_REQUEST['site'] ) ) {echo esc_attr( urldecode($_REQUEST['site']) );} ?>" autocompletelist="mainwp-test-sites" class="mainwp_autocomplete" />
 						<datalist id="mainwp-test-sites">
 							<?php
 							$websites = MainWP_DB::Instance()->query( MainWP_DB::Instance()->getSQLWebsitesForCurrentUser() );

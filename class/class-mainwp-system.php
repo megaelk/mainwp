@@ -68,7 +68,7 @@ class MainWP_System {
 			} else if ( version_compare( $currentVersion, $this->current_version, '<' ) ) {
 				update_option( 'mainwp_reset_user_tips', array() );
 				MainWP_Utility::update_option( 'mainwp_reset_user_cookies', array() );
-				MainWP_Utility::update_option( 'mainwp_getting_started', 'whatnew' );
+				//MainWP_Utility::update_option( 'mainwp_getting_started', 'whatnew' );
 
 			} else {
 				delete_option('mainwp_getting_started');
@@ -2328,8 +2328,8 @@ class MainWP_System {
 					wp_redirect( admin_url( 'admin.php?page=mainwp_about&do=started' ) );
 					exit;
 				} else if ( 'whatnew' == $started ) {
-					wp_redirect( admin_url( 'admin.php?page=mainwp_about&do=whatnew' ) );
-					exit;
+//					wp_redirect( admin_url( 'admin.php?page=mainwp_about&do=whatnew' ) );
+//					exit;
 				}
 			}
 		}

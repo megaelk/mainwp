@@ -7,7 +7,7 @@ Author URI: https://mainwp.com
 Plugin URI: https://mainwp.com
 Requires at least: 3.6
 Tested up to: 5.0
-Stable tag: 3.5
+Stable tag: 3.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -162,6 +162,23 @@ Sure we have a quick FAQ with a lot more questions and answers [here](https://ma
 9. Global Dashboard Screen
 
 == Changelog ==
+
+= 3.5.1 - 11-14-18 =
+* Fixed: an issue with generating incorrect URL for the Test Connection feature
+* Fixed: an issue with redirecting to the Overview page
+* Fixed multiple PHP warnings
+* Fixed: an issue with updating stagings sites
+* Added: support for custom extension icons
+* Added: a new feature for refreshing site favicons
+* Added: multiple security enhancements
+* Added: mainwp_getmainwpdir hook
+* Added: mainwp_updated_site hook
+* Added: mainwp_synced_all_sites hook
+* Added: mainwp_left_menu_sub hook
+* Added: mainwp_subleft_menu_sub hook
+* Added: mainwp_removed_extension_menu hook
+* Added: mainwp_extensions_top_header_after_tab hook
+* Added: support for the upcomin 3rd party extension
 
 = 3.5 - 9-27-18 =
 * Fixed: multiple PHP warnings

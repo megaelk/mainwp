@@ -13,7 +13,7 @@ define( 'MAINWP_API_INVALID', 'INVALID' );
 define( 'MAINWP_TWITTER_MAX_SECONDS', 60 * 5 ); // seconds
 
 class MainWP_System {
-	public static $version = '3.5';
+	public static $version = '3.5.1';
 	//Singleton
 	private static $instance = null;
 
@@ -2020,10 +2020,6 @@ class MainWP_System {
 	}
 
 	public static function isMainWP_Pages() {
-        global $current_screen;
-        if ( empty( $current_screen ) )
-            set_current_screen();
-
 		$screen = get_current_screen();
 		if ( $screen && strpos( $screen->base, 'mainwp_' ) !== false ) {
 			return true;
@@ -2340,9 +2336,11 @@ class MainWP_System {
 			$hide_menus = array();
 		}
 
-         // if open mainwp pages then don't redirect
-        if ( self::isMainWP_Pages() ) {
-            return;
+        // if open mainwp pages then don't redirect
+        if (isset($_GET['page'])) {
+            if ( self::isMainWP_Pages() ) {
+                return;
+            }
         }
 
 		$hide_wp_dashboard = in_array( 'dashboard', $hide_menus );

@@ -484,6 +484,10 @@ class MainWP_System {
 			return;
 		}
 
+        if (!isset($extensions[$plugin_slug]['apiManager']) || !$extensions[$plugin_slug]['apiManager']) {
+            return;
+        }
+
 		if ( isset($extensions[$plugin_slug]['activated_key']) && 'Activated' == $extensions[$plugin_slug]['activated_key'] ) {
 			return;
 		}
@@ -1675,7 +1679,8 @@ class MainWP_System {
 						$filename = basename( $information['faviIconUrl'] );
 						if ( $filename ) {
 							$filename = 'favi-' . $siteId . '-' . $filename;
-							if ( file_put_contents( $iconsDir . $filename, $content ) ) {
+							if ( $size = file_put_contents( $iconsDir . $filename, $content ) ) {
+                                MainWP_Logger::Instance()->debug( 'Icon size :: ' . $size );
 								MainWP_DB::Instance()->updateWebsiteOption( $website, 'favi_icon', $filename );
 								return array( 'result' => 'success' ) ;
 							} else {
@@ -2336,15 +2341,8 @@ class MainWP_System {
 			$hide_menus = array();
 		}
 
-        // if open mainwp pages then don't redirect
-        if (isset($_GET['page'])) {
-            if ( self::isMainWP_Pages() ) {
-                return;
-            }
-        }
-
 		$hide_wp_dashboard = in_array( 'dashboard', $hide_menus );
-        // it hide WP dashboard and open WP dashboard page or
+        // if hide WP dashboard and open WP dashboard page or
         // if open /wp-admin/ path then check to redirect to mainwp overview
 		if ( ($hide_wp_dashboard && strpos( $_SERVER['REQUEST_URI'], 'index.php' ) ) || (strpos( $_SERVER['REQUEST_URI'], '/wp-admin/' ) !== false && strpos( $_SERVER['REQUEST_URI'], '/wp-admin/' ) == $_pos ) ) {
             if ( mainwp_current_user_can( 'dashboard', 'access_global_dashboard' ) ) { // to fix

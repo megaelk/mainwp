@@ -17,7 +17,7 @@ class MainWP_Security_Issues {
 		if ( ! MainWP_Utility::can_edit_website( $website ) ) {
 			return;
 		}
-			?>
+        ?>
 		<div class="mainwp-postbox-actions-top">
 			<?php _e( 'We highly suggest you make a full backup before you run the Security Update.', 'mainwp' ); ?>
 		</div>
@@ -141,6 +141,7 @@ class MainWP_Security_Issues {
 								</a></span><span id="registered_versions_unfix" style="display: none"><a href="#" style="text-decoration: none;"><i class="fa fa-wrench"></i> <?php _e( 'Unfix', 'mainwp' ); ?>
 								</a></span></td>
 					</tr>
+                    <?php if ( !property_exists( $website, 'wpe' ) || $website->wpe == 0 ) { ?>
 					<tr>
 					<td class="mainwp-padding-10 mainwp-cols-10 mainwp-center">
 						<span id="readme_loading"><i class="fa fa-spinner fa-2x fa-pulse"></i></span><span id="readme_ok" class="mainwp-green" style="display: none;"><i class="fa fa-check fa-2x"></i></span><span id="readme_nok" class="mainwp-red" style="display: none;"><i class="fa fa-times fa-2x"></i></span>
@@ -157,6 +158,7 @@ class MainWP_Security_Issues {
 								</a> - <?php _e( 'You need to re-upload the readme.html file manually to unfix this.', 'mainwp' ); ?></span>
 						</td>
 					</tr>
+                    <?php } ?>
 					<tr>
 					<td class="mainwp-padding-10 mainwp-cols-10 mainwp-center">
 						<span id="admin_loading"><i class="fa fa-spinner fa-2x fa-pulse"></i></span><span id="admin_ok" class="mainwp-green" style="display: none;"><i class="fa fa-check fa-2x"></i></span><span id="admin_nok" class="mainwp-red" style="display: none;"><i class="fa fa-times fa-2x"></i></span>

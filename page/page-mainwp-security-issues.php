@@ -157,7 +157,7 @@ class MainWP_Security_Issues {
 						<br />
 						<em><?php _e( 'After fixing this issue, the readme.html file will be removed from the Child Site root directory', 'mainwp' ); ?></em>
                         <?php if ( $is_wpengine ) { ?>
-                        <strong><?php _e( 'Removing the file on WPEngine hosting can cause issues. If you need to remove the file, please consult the WPEngine support first.', 'mainwp' ); ?></strong>
+                        <strong id="readme-wpe-nok"><?php _e( 'Removing the file on WPEngine hosting can cause issues. If you need to remove the file, please consult the WPEngine support first.', 'mainwp' ); ?></strong>
                         <?php } ?>
 					</td>
 					<td class="mainwp-padding-10 mainwp-cols-10">

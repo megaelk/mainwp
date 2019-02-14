@@ -604,6 +604,11 @@ securityIssues_handle = function (response) {
                         jQuery('#' + issue + '_ok').show();
                         jQuery('#' + issue + '-status-ok').show();
                         jQuery('#' + issue + '-status-nok').hide();
+
+                        if (issue == 'readme') {
+                            jQuery('#readme-wpe-nok').hide();
+                        }
+                        
                     }
                     else {
                         jQuery('#' + issue + '_extra').hide();

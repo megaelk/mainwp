@@ -961,7 +961,7 @@ public static function renderFooter( $shownPage ) {
 	}
 
 	public static function getSSLWarning() {
-		$conf = array( 'private_key_bits' => 384 );
+		$conf = array( 'private_key_bits' => 2048 );
 		$conf_loc = MainWP_System::get_openssl_conf();
 		if ( !empty( $conf_loc ) ) {
 			$conf['config'] = $conf_loc;

@@ -927,20 +927,23 @@ class MainWP_System {
 		$theme_automaticDailyUpdate = get_option( 'mainwp_themeAutomaticDailyUpdate' );
 
 		$mainwpLastAutomaticUpdate = get_option( 'mainwp_updatescheck_last' );
-
+        $checked_today  = false;
         $mainwpHoursIntervalAutomaticUpdate = apply_filters( 'mainwp_updatescheck_hours_interval' , false);
         if ( $mainwpHoursIntervalAutomaticUpdate > 0 ) {
             $lasttimeAutomaticUpdate = get_option( 'mainwp_updatescheck_last_timestamp' );
 
             if ( $lasttimeAutomaticUpdate && ( $lasttimeAutomaticUpdate + $mainwpHoursIntervalAutomaticUpdate * 3600 > time() ) ) {
                 MainWP_Logger::Instance()->debug( 'CRON :: updates check :: already updated hours interval' );
-                return;
+                $checked_today = true;
             }
         } else if ( $mainwpLastAutomaticUpdate == date( 'd/m/Y' ) ) {
 			MainWP_Logger::Instance()->debug( 'CRON :: updates check :: already updated today' );
-
-			return;
+            $checked_today = true;
 		}
+
+        if ( $checked_today ) {
+            return;
+        }
 
 		if ( 'Y' == get_option('mainwp_updatescheck_ready_sendmail') ) {
 			$send_noti_at = apply_filters( 'mainwp_updatescheck_sendmail_at_time', false );

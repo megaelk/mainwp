@@ -154,7 +154,7 @@ Sure we have a quick FAQ with a lot more questions and answers [here](https://ma
 
 == Changelog ==
 
-= 4.0 - 8-26-19 =
+= 4.0 - 8-27-19 =
 * Fixed: various functionality problems
 * Fixed: various performance problems
 * Fixed: various cosmetic problems
@@ -170,7 +170,6 @@ Sure we have a quick FAQ with a lot more questions and answers [here](https://ma
 * Updated: Updates Overview widget simplified
 * Updated: the Updates page redesigned to provide easier updates management
 * Updated: redesigned Sites table
-* Updated: extensions license authentication to support EDD licensing system
 * Updated: disabled the "Managed Client Reports for WooCommerce" settings page by default and added the option to enable it
 * Updated: extensions icons
 * Updated: notifications texts

@@ -122,16 +122,9 @@ class MainWP_Manage_Sites {
 		$i = 1;
 		if ( isset( $_REQUEST[ 'do' ] ) ) {
 			if ( 'new' == $_REQUEST[ 'do' ] ) {
-//				$sync_extensions_options = apply_filters( 'mainwp-sync-extensions-options', array() );
-//				$working_extensions		 = MainWP_Extensions::getExtensions();
-//				if ( count( $working_extensions ) > 0 && count( $sync_extensions_options ) > 0 ) {
-//					add_meta_box(
-//					'mwp-newsite-contentbox-' . $i++, '<i class="cog icon"></i> ' . __( 'Extensions Settings Synchronization', 'mainwp' ), array( 'MainWP_Manage_Sites_View', 'renderSyncExtsSettings' ), 'mainwp_postboxes_managesites_addnew', 'normal', 'core'
-//					);
-//				}
 				return;
 			}
-		} else if ( isset( $_GET[ 'id' ] ) || isset( $_GET[ 'scanid' ] ) || isset( $_GET[ 'backupid' ] ) ) {			
+		} else if ( isset( $_GET[ 'id' ] ) || isset( $_GET[ 'scanid' ] ) || isset( $_GET[ 'backupid' ] ) || isset( $_GET[ 'updateid' ] ) ) {			
 			return;
 		} 
 

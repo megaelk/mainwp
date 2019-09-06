@@ -424,7 +424,7 @@ class MainWP_UI {
 			$all_updates = wp_get_update_data();
 			if ( is_array($all_updates) && isset($all_updates['counts']['total']) && $all_updates['counts']['total'] > 0  ) {
 				?>
-				<a class="ui red icon button" data-inverted="" data-position="bottom right" data-tooltip="<?php esc_html_e( 'Your MainWP Dashboard sites needs your attention. Please check the available updates', 'mainwp' ); ?>" href="plugins.php">
+				<a class="ui red icon button" data-inverted="" data-position="bottom right" data-tooltip="<?php esc_html_e( 'Your MainWP Dashboard sites needs your attention. Please check the available updates', 'mainwp' ); ?>" href="update-core.php">
 					<i class="exclamation triangle icon"></i>
 				</a>
 				<?php

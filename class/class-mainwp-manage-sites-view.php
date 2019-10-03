@@ -524,10 +524,10 @@ class MainWP_Manage_Sites_View {
             <label class="six wide column middle aligned"><?php esc_html_e( 'Archive format', 'mainwp' ); ?></label>
 			<div class="ten wide column">
 				<select class="ui dropdown" name="mainwp_archiveFormat" id="mainwp_archiveFormat">
-									<option value="zip" <?php if ( $archiveFormat == 'zip' ) : ?>selected<?php endif; ?>>Zip</option>
-									<option value="tar" <?php if ( $archiveFormat == 'tar' ) : ?>selected<?php endif; ?>>Tar</option>
-									<option value="tar.gz" <?php if ( ($archiveFormat === false) || ($archiveFormat == 'tar.gz') ) : ?>selected<?php endif; ?>>Tar GZip</option>
-									<option value="tar.bz2" <?php if ( $archiveFormat == 'tar.bz2' ) : ?>selected<?php endif; ?>>Tar BZip2</option>
+					<option value="zip" <?php if ( $archiveFormat == 'zip' ) : ?>selected<?php endif; ?>>Zip</option>
+					<option value="tar" <?php if ( $archiveFormat == 'tar' ) : ?>selected<?php endif; ?>>Tar</option>
+					<option value="tar.gz" <?php if ( ($archiveFormat === false) || ($archiveFormat == 'tar.gz') ) : ?>selected<?php endif; ?>>Tar GZip</option>
+					<option value="tar.bz2" <?php if ( $archiveFormat == 'tar.bz2' ) : ?>selected<?php endif; ?>>Tar BZip2</option>
 				</select>
 			</div>
 		</div>

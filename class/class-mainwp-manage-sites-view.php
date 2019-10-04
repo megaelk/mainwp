@@ -1351,8 +1351,8 @@ class MainWP_Manage_Sites_View {
 						</div>
 
 						<div class="ui grid field">
-							<label class="six wide column middle aligned"><?php esc_html_e( 'Site friendly name', 'mainwp' ); ?></label>
-				  <div class="ui six wide column" data-tooltip="<?php esc_attr_e( 'Enter the website friendly name.', 'mainwp' ); ?>" data-inverted="" data-position="top left">
+							<label class="six wide column middle aligned"><?php esc_html_e( 'Site title', 'mainwp' ); ?></label>
+				  <div class="ui six wide column" data-tooltip="<?php esc_attr_e( 'Enter the website title.', 'mainwp' ); ?>" data-inverted="" data-position="top left">
 								<div class="ui left labeled input">
 									<input type="text" id="mainwp_managesites_edit_sitename" name="mainwp_managesites_edit_sitename" value="<?php echo esc_attr( stripslashes( $website->name ) ); ?>" />
 								</div>

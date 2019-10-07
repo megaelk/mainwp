@@ -367,11 +367,11 @@ class MainWP_Setup_Wizard {
 		<h1><?php _e( 'Add Your First WordPress Site To Your Dashboard', 'mainwp' ); ?></h1>
 			<div class="ui info message">
 				<?php _e( 'MainWP requires the MainWP Child plugin to be installed and activated on the WordPress site that you want to connect to your MainWP Dashboard.', 'mainwp' ); ?>
-				<?php _e( 'If you have it installed, click the Installed button to connect the site, if not, follow these instructions to intall it.', 'mainwp' ); ?><br /><br />
+				<?php _e( 'If you have it installed, click the "MainWP Child Plugin Installed" button to connect the site, if not, follow these instructions to install it.', 'mainwp' ); ?><br /><br />
 				<?php _e( 'If you need additional help with installing the MainWP Child, please see this <a href="https://mainwp.com/help/docs/set-up-the-mainwp-plugin/install-mainwp-child/" target="_blank">help document</a>.', 'mainwp' ); ?>
 			</div>
 			<ol>
-				<li><?php _e( 'Login to the child site <em>(open it in a new browser tab)</em>', 'mainwp' ); ?></li>
+				<li><?php _e( 'Login to the WordPress site you want to connect <em>(open it in a new browser tab)</em>', 'mainwp' ); ?></li>
 				<li><?php _e( 'Go to the <strong>WP > Plugins</strong> page', 'mainwp' ); ?></li>
 				<li><?php _e( 'Click <strong>Add New</strong> to install a new plugin', 'mainwp' ); ?></li>
 				<li><?php _e( 'In the <strong>Search Field</strong>, enter “MainWP Child” and once the plugin shows, click the Install button', 'mainwp' ); ?></li>
@@ -380,7 +380,7 @@ class MainWP_Setup_Wizard {
 			<div class="ui clearing hidden divider"></div>
 			<div class="ui hidden divider"></div>
 			<div class="ui hidden divider"></div>
-			<a href="admin.php?page=mainwp-setup&step=connect_first_site" class="ui big green right floated button"><?php esc_attr_e( 'Plugin Installed', 'mainwp' ); ?></a>
+			<a href="admin.php?page=mainwp-setup&step=connect_first_site" class="ui big green right floated button"><?php esc_attr_e( 'MainWP Child Plugin Installed', 'mainwp' ); ?></a>
 			<a href="admin.php?page=mainwp-setup&step=hosting_setup" class="ui big button"><?php _e( 'Skip For Now', 'mainwp' ); ?></a>
 			<a href="<?php echo esc_url( $this->get_back_step_link() ); ?>" class="ui big basic green button"><?php _e( 'Back', 'mainwp' ); ?></a>
 			<?php wp_nonce_field( 'mwp-setup' ); ?>
@@ -395,6 +395,7 @@ class MainWP_Setup_Wizard {
 				<div class="ui message" id="mainwp-message-zone" style="display:none"></div>
 				<div class="ui red message" id="mainwp-error-zone" style="display:none"></div>
 				<div class="ui green message" id="mainwp-success-zone" style="display:none"></div>
+				<div class="ui info message" id="mainwp-info-zone" style="display:none"></div>
 				<div class="ui hidden divider"></div>
 				<div class="field">
 					<label><?php _e( "What is the site URL? ", "mainwp" ); ?></label>
@@ -440,13 +441,13 @@ class MainWP_Setup_Wizard {
 
 			<div class="ui clearing hidden divider"></div>
 			<div class="ui hidden divider"></div>
-			<div class="ui hidden divider"></div>			
+			<div class="ui hidden divider"></div>
 			<a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="ui big green right floated button"><?php _e( 'Continue', 'mainwp' ); ?></a>
 			<a href="<?php echo esc_url( $this->get_back_step_link() ); ?>" class="ui big basic green button"><?php _e( 'Back', 'mainwp' ); ?></a>
 			<?php wp_nonce_field( 'mwp-setup' ); ?>
-			<input type="hidden" id="nonce_secure_data" 
-				  mainwp_addwp="<?php echo wp_create_nonce( 'mainwp_addwp' ); ?>" 
-				  mainwp_checkwp="<?php echo wp_create_nonce( 'mainwp_checkwp' ); ?>" 
+			<input type="hidden" id="nonce_secure_data"
+				  mainwp_addwp="<?php echo wp_create_nonce( 'mainwp_addwp' ); ?>"
+				  mainwp_checkwp="<?php echo wp_create_nonce( 'mainwp_checkwp' ); ?>"
 				  />
 		</form>
 		<?php
@@ -483,7 +484,7 @@ class MainWP_Setup_Wizard {
 			<div class="ui hidden divider"></div>
 			<div class="ui hidden divider"></div>
 			<input type="submit" class="ui big green right floated button" value="<?php esc_attr_e( 'Continue', 'mainwp' ); ?>" name="save_step" />
-			<a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="ui big button"><?php _e( 'Skip', 'mainwp' ); ?></a>			
+			<a href="<?php echo esc_url( $this->get_next_step_link() ); ?>" class="ui big button"><?php _e( 'Skip', 'mainwp' ); ?></a>
 			<a href="admin.php?page=mainwp-setup&step=install_mainwp_child" class="ui big basic green button"><?php _e( 'Back', 'mainwp' ); ?></a>
 			<?php wp_nonce_field( 'mwp-setup' ); ?>
 		</form>
@@ -650,7 +651,7 @@ class MainWP_Setup_Wizard {
 		check_admin_referer( 'mwp-setup' );
 		$important_notification							 = (!isset( $_POST[ 'mwp_setup_options_important_notification' ] ) ? 0 : 1);
 		update_option( 'mwp_setup_importantNotification', $important_notification );
-		MainWP_Utility::update_option( 'mainwp_notificationOnBackupFail', $important_notification );		
+		MainWP_Utility::update_option( 'mainwp_notificationOnBackupFail', $important_notification );
 		$userExtension									 = MainWP_DB::Instance()->getUserExtension();
 		$userExtension->offlineChecksOnlineNotification	 = $important_notification;
 
@@ -1317,7 +1318,7 @@ class MainWP_Setup_Wizard {
 		    <?php _e( 'Your MainWP Dashboard is Ready!', 'mainwp' ); ?>
 		    <div class="sub header"><?php _e( 'Congratulations! Now you are ready to start managing your WordPress sites.', 'mainwp' ); ?></div>
 				<div class="ui hidden divider"></div>
-				<a class="ui massive green button" href="<?php echo esc_url( admin_url( 'admin.php?page=managesites&do=new' ) ); ?>"><?php _e( 'Start Connecting Your WordPress Sites', 'mainwp' ); ?></a>
+				<a class="ui massive green button" href="<?php echo esc_url( admin_url( 'admin.php?page=mainwp_tab' ) ); ?>"><?php _e( 'Start Managing Your Sites', 'mainwp' ); ?></a>
 			</div>
 		</h1>
 		<div class="ui hidden divider"></div>

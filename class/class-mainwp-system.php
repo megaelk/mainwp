@@ -17,7 +17,7 @@ const MAINWP_VIEW_PER_GROUP = 2;
 
 class MainWP_System {
 
-	public static $version = '4.0.3';
+	public static $version = '4.0.4';
 	//Singleton
 	private static $instance = null;
 	private $upgradeVersionInfo = null;

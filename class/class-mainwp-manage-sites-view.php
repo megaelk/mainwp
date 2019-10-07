@@ -1677,29 +1677,25 @@ class MainWP_Manage_Sites_View {
 						$http_user	 = isset( $params[ 'http_user' ] ) ? $params[ 'http_user' ] : '';
 						$http_pass	 = isset( $params[ 'http_pass' ] ) ? $params[ 'http_pass' ] : '';
 						global $current_user;
-						$id			 = MainWP_DB::Instance()->addWebsite( $current_user->ID, $params[ 'name' ], $params[ 'url' ], $params[ 'wpadmin' ], base64_encode( $pubkey ), base64_encode( $privkey ), $information[ 'nossl' ], (isset( $information[ 'nosslkey' ] ) ? $information[ 'nosslkey' ] : null ), $groupids, $groupnames, $verifyCertificate, $addUniqueId, $http_user, $http_pass, $sslVersion );
-						
-						if (isset($params['qsw_page']) && $params['qsw_page']) {
-							$message	 = __( 'Site successfully added! You can add another one or proceed with the Quick Setup Wizard.', 'mainwp' );
-						} else {						
-							$message	 = sprintf( __( 'Site successfully added - Visit the Site\'s %sDashboard%s now.', 'mainwp' ), '<a href="admin.php?page=managesites&dashboard=' . $id . '" style="text-decoration: none;" title="' . __( 'Dashboard', 'mainwp' ) . '">', '</a>' );
+						$id = MainWP_DB::Instance()->addWebsite( $current_user->ID, $params[ 'name' ], $params[ 'url' ], $params[ 'wpadmin' ], base64_encode( $pubkey ), base64_encode( $privkey ), $information[ 'nossl' ], (isset( $information[ 'nosslkey' ] ) ? $information[ 'nosslkey' ] : null ), $groupids, $groupnames, $verifyCertificate, $addUniqueId, $http_user, $http_pass, $sslVersion );
+
+						if ( isset( $params['qsw_page'] ) && $params['qsw_page'] ) {
+							$message = sprintf( __( '<div class="ui header">Congratulations you have connected %s.</div> You can add new sites at anytime from the Add New Site page.', 'mainwp' ), '<strong>' . $params[ 'name' ] . '</strong>'  );
+						} else {
+							$message = sprintf( __( 'Site successfully added - Visit the Site\'s %sDashboard%s now.', 'mainwp' ), '<a href="admin.php?page=managesites&dashboard=' . $id . '" style="text-decoration: none;" title="' . __( 'Dashboard', 'mainwp' ) . '">', '</a>' );
 						}
 						do_action( 'mainwp_added_new_site', $id ); // must before getWebsiteById to update team control permisions
 						$website	 = MainWP_DB::Instance()->getWebsiteById( $id );
 						MainWP_Sync::syncInformationArray( $website, $information );
 					} else {
-						$error = __( 'Undefined error.', 'mainwp' );
+						$error = __( 'Undefined error occurred. Please try again. For additional help, contact the MainWP Support.', 'mainwp' );
 					}
 				}
 			} catch ( MainWP_Exception $e ) {
 				if ( $e->getMessage() == 'HTTPERROR' ) {
-					$error = 'HTTP error' . ($e->getMessageExtra() != null ? ' - ' . $e->getMessageExtra() : '');
+					$error = 'HTTP error' . ( $e->getMessageExtra() != null ? ' - ' . $e->getMessageExtra() : '' );
 				} else if ( $e->getMessage() == 'NOMAINWP' ) {
-					$error = __( 'No MainWP Child plugin detected, first install and activate the plugin and add your site to MainWP afterwards. If you continue experiencing this issue please ', 'mainwp' );
-					if ( $e->getMessageExtra() != null ) {
-						$error .= sprintf( __( 'test your connection %shere%s or ', 'mainwp' ), '<a href="' . admin_url( 'admin.php?page=managesites&do=test&site=' . urlencode( $e->getMessageExtra() ) ) . '">', '</a>' );
-					}
-					$error .= sprintf( __( 'post as much information as possible on the error in the %ssupport forum%s.', 'mainwp' ), '<a href="https://mainwp.com/forum/">', '</a>' );
+					$error = __( 'MainWP Child Plugin not detected! Please make sure that the MainWP Child plugin is installed and activated on the child site. For additional help, contact the MainWP Support.', 'mainwp' );
 				} else {
 					$error = $e->getMessage();
 				}

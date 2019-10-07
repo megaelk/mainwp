@@ -1579,7 +1579,11 @@ class MainWP_Manage_Sites_View {
 		$params[ 'http_pass' ]			 			= isset( $_POST[ 'managesites_add_http_pass' ] ) ? $_POST[ 'managesites_add_http_pass' ] : '';
 		$params[ 'groupids' ]			 				= isset( $_POST[ 'groupids' ] ) && !empty($_POST[ 'groupids' ]) ? explode(",", $_POST[ 'groupids' ] ) : array();
 		$params[ 'groupnames_import' ]	 	= isset( $_POST[ 'groupnames_import' ] ) ? $_POST[ 'groupnames_import' ] : '';
-
+		
+		if ( isset( $_POST[ 'qsw_page' ] ) ) {
+			$params['qsw_page'] = $_POST[ 'qsw_page' ];
+		}
+		
 		return MainWP_Manage_Sites_View::addWPSite( $website, $params );
 	}
 
@@ -1674,7 +1678,12 @@ class MainWP_Manage_Sites_View {
 						$http_pass	 = isset( $params[ 'http_pass' ] ) ? $params[ 'http_pass' ] : '';
 						global $current_user;
 						$id			 = MainWP_DB::Instance()->addWebsite( $current_user->ID, $params[ 'name' ], $params[ 'url' ], $params[ 'wpadmin' ], base64_encode( $pubkey ), base64_encode( $privkey ), $information[ 'nossl' ], (isset( $information[ 'nosslkey' ] ) ? $information[ 'nosslkey' ] : null ), $groupids, $groupnames, $verifyCertificate, $addUniqueId, $http_user, $http_pass, $sslVersion );
-						$message	 = sprintf( __( 'Site successfully added - Visit the Site\'s %sDashboard%s now.', 'mainwp' ), '<a href="admin.php?page=managesites&dashboard=' . $id . '" style="text-decoration: none;" title="' . __( 'Dashboard', 'mainwp' ) . '">', '</a>' );
+						
+						if (isset($params['qsw_page']) && $params['qsw_page']) {
+							$message	 = __( 'Site successfully added! You can add another one or proceed with the Quick Setup Wizard.', 'mainwp' );
+						} else {						
+							$message	 = sprintf( __( 'Site successfully added - Visit the Site\'s %sDashboard%s now.', 'mainwp' ), '<a href="admin.php?page=managesites&dashboard=' . $id . '" style="text-decoration: none;" title="' . __( 'Dashboard', 'mainwp' ) . '">', '</a>' );
+						}
 						do_action( 'mainwp_added_new_site', $id ); // must before getWebsiteById to update team control permisions
 						$website	 = MainWP_DB::Instance()->getWebsiteById( $id );
 						MainWP_Sync::syncInformationArray( $website, $information );

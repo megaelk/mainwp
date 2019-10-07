@@ -357,6 +357,7 @@ mainwp_setup_managesites_add = function ( event ) {
             managesites_add_uniqueId: jQuery( '#mainwp_managesites_add_uniqueId' ).val(),
             groupids: group_ids,
             verify_certificate: jQuery( '#mainwp_managesites_verify_certificate' ).val(),
+            qsw_page: true,            
 //            force_use_ipv4: jQuery( '#mainwp_managesites_force_use_ipv4' ).val(),
 //            ssl_version: jQuery( '#mainwp_managesites_ssl_version' ).val(),
 //            managesites_add_http_user: jQuery( '#mainwp_managesites_add_http_user' ).val(),

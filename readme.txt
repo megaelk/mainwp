@@ -154,6 +154,17 @@ Sure we have a quick FAQ with a lot more questions and answers [here](https://ma
 
 == Changelog ==
 
+= 4.0.5 - 11-15-19 =
+* Fixed: an issue with daily sync frequency
+* Fixed: multiple PHP warnings
+* Fixed: multiple typos
+* Added: 'mainwp_ui_use_wp_calendar' filter to replace Semantic UI date picker with the WordPress default one
+* Added: 'mainwp-users-manage-roles' filter to add support for searching users with custom roles
+* Added: 'mainwp_deletesite' filter
+* Updated: multiple usability and cosmetic updates
+* Updated: multiple text notifications
+* Preventative: security improvements
+
 = 4.0.4 - 10-7-19 =
 * Fixed: an issue with applying extensions settings when adding a new site.
 * Fixed: issues with the Custom Post Types extension

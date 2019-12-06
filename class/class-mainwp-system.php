@@ -2794,7 +2794,7 @@ class MainWP_System {
 			wp_enqueue_script( 'mainwp-updates', MAINWP_PLUGIN_URL . 'assests/js/mainwp-updates.js', array(), $this->current_version );
 			wp_enqueue_script( 'mainwp-managesites', MAINWP_PLUGIN_URL . 'assests/js/mainwp-managesites.js', array(), $this->current_version );
 			wp_enqueue_script( 'mainwp-extensions', MAINWP_PLUGIN_URL . 'assests/js/mainwp-extensions.js', array(), $this->current_version );
-			wp_enqueue_script( 'mainwp-moment', MAINWP_PLUGIN_URL . 'assests/js/moment.min.js', array(), $this->current_version );
+			wp_enqueue_script( 'mainwp-moment', MAINWP_PLUGIN_URL . 'assests/js/moment/moment.min.js', array(), $this->current_version );
             wp_enqueue_script( 'semantic', MAINWP_PLUGIN_URL . 'assests/js/semantic-ui/semantic.min.js', array( 'jquery' ), $this->current_version );
             wp_enqueue_script( 'semantic-ui-datatables', MAINWP_PLUGIN_URL . 'assests/js/datatables/datatables.min.js', array( 'jquery' ), $this->current_version );
 			wp_enqueue_script( 'semantic-ui-datatables-colreorder', MAINWP_PLUGIN_URL . 'assests/js/colreorder/dataTables.colReorder.js', array( 'jquery' ), $this->current_version );

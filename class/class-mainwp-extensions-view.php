@@ -753,6 +753,17 @@ class MainWP_Extensions_View {
 				'catalog_id' => '1053988',
 				'group'		 => array( 'security' )
 			),
+			'mainwp-pro-reports-extension' =>
+			array(
+				'slug'		 => 'mainwp-pro-reports-extension',
+				'title'		 => 'MainWP Pro Reports Extension',
+				'desc'		 => 'The MainWP Pro Reports extension is a fully customizable reporting engine that allows you to create the type of report you are proud to send to your clients.',
+				'link'		 => 'https://mainwp.com/extension/pro-reports/',
+				'img'		 => $folder_url . 'pro-reports.png',
+				'product_id' => 'MainWP Pro Reports Extension',
+				'catalog_id' => '1133708',
+				'group'		 => array( 'admin' )
+			),
 		);
 	}
 

@@ -1054,18 +1054,13 @@ class MainWP_Connect {
 	 *
 	 * @param mixed $resource The given resource.
 	 *
-	 * @return $result Resource ID only.
+	 * @return (int) $resource  CurlHandle cast to (int) still seems to return handle id in PHP8?
 	 */
 	public static function get_resource_id( $resource ) {
-		if ( ! is_resource( $resource ) ) {
+		if($resource === false) {
 			return false;
 		}
-
-		$resourceString = (string) $resource;
-		$exploded       = explode( '#', $resourceString );
-		$result         = array_pop( $exploded );
-
-		return $result;
+		return (int) $resource;
 	}
 
 	/**
